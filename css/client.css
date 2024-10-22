@@ -1,0 +1,15 @@
+h1{
+    text-align: center;
+}
+
+.logOff{
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    padding: 10px 20px;
+    background-color: darkgray;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer; 
+}
