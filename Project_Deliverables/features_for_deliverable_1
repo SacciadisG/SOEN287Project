@@ -5,5 +5,16 @@ Implemented features in deliverable 1:
 
 -Register page
 -Login page
--
+-Business side of view which includes:
+    -business edit (to make change on the business)
+    -business index
+    -contact customer
+    -services edit (to make change on service)
+    -services purchased (to view purchased services)
+    -services requested (to view requested services)
+-Client side of view which includes:
+    -client index
+    -receipt view (for client to view receipt detail)
+    -services request (to purchase other service)
+    -services view (to view all purchased services)
 
