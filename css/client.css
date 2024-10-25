@@ -28,7 +28,7 @@ h1{
     text-align: center;
 }
 .contactbar a:hover{
-    background-color: purple;
+    background-color:  rgb(70, 70, 250);
 }
 .contactbar li{
     float: left;
@@ -42,6 +42,10 @@ h1{
     display: inline-flex; 
     gap: 20px; 
     background-color: #f0f0f0; 
+    width: 110px; /* Set a specific width */
+    height: 100px; /* Set a specific height */
+    justify-content: center; /* Center the icon horizontally */
+    align-items: center; /* Center the icon vertically */
 }
 .fa-sharp.fa-solid.fa-phone.fa-5x:hover{
     color:greenyellow;
@@ -55,6 +59,10 @@ h1{
     display: inline-flex; 
     gap: 15px; 
     background-color: #f0f0f0; 
+    width: 100px; /* Set a specific width */
+    height: 100px; /* Set a specific height */
+    justify-content: center; /* Center the icon horizontally */
+    align-items: center; /* Center the icon vertically */
 
 }
 .fa-solid.fa-user:hover{
@@ -76,6 +84,13 @@ h1{
     align-items: center;
     margin: 20px; 
 }
+.icon-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 20px; /* Space between grid items */
+    max-width: 800px; /* Optional: Limit the maximum width */
+    margin: 20px auto; /* Center the container with some margin */
+}
 .fa-solid.fa-screwdriver-wrench{
     color: black;
     font-size:5em;
@@ -85,6 +100,10 @@ h1{
     display: inline-flex; 
     gap: 20px; 
     background-color: #f0f0f0;
+    width: 100px; /* Set a specific width */
+    height: 100px; /* Set a specific height */
+    justify-content: center; /* Center the icon horizontally */
+    align-items: center; /* Center the icon vertically */
     
 }
 .fa-solid.fa-screwdriver-wrench:hover{
@@ -101,6 +120,10 @@ h1{
     display: inline-flex; 
     gap: 20px; 
     background-color: #f0f0f0;
+    width: 100px; /* Set a specific width */
+    height: 100px; /* Set a specific height */
+    justify-content: center; /* Center the icon horizontally */
+    align-items: center; /* Center the icon vertically */
 }
 .fa-solid.fa-receipt:hover{
     color:darkred;
@@ -118,4 +141,41 @@ h1{
 }
 .fa-solid.fa-clock-rotate-left:hover{
     color: darkgray;
+}
+.fa-solid.fa-bell{
+    color:rgb(53, 52, 52);
+    font-size:5em;
+    border: 3px solid blueviolet; 
+    padding: 25px; 
+    border-radius: 10px; 
+    display: inline-flex; 
+    gap: 20px; 
+    background-color: #f0f0f0;
+    width: 100px; /* Set a specific width */
+    height: 100px; /* Set a specific height */
+    justify-content: center; /* Center the icon horizontally */
+    align-items: center; /* Center the icon vertically */
+    
+}
+.fa-solid.fa-bell:hover{
+    color:gray;
+}
+
+.fa-solid.fa-info{
+    color: darkblue;
+    font-size: 4em; /* Increase the icon size */
+    border: 3px solid blueviolet; 
+    padding: 40px; /* Adjust padding for more space */
+    border-radius: 10px; 
+    display: inline-flex; 
+    gap: 20px; 
+    background-color: #f0f0f0;
+    width: 70px; /* Set a specific width */
+    height: 70px; /* Set a specific height */
+    justify-content: center; /* Center the icon horizontally */
+    align-items: center; /* Center the icon vertically */
+}
+
+.fa-solid.fa-info:hover{
+    color:lightskyblue;
 }
