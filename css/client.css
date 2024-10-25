@@ -13,3 +13,23 @@ h1{
     border-radius: 5px;
     cursor: pointer; 
 }
+.contactbar ul{
+    list-style-type: none;
+    background-color: blueviolet;
+    padding: 0px;
+    margin: 0px;
+    overflow: hidden;
+}
+.contactbar a{
+    color:black;
+    text-decoration: none;
+    padding: 15px;
+    display: block;
+    text-align: center;
+}
+.contactbar a:hover{
+    background-color: purple;
+}
+.contactbar li{
+    float: left;
+}
