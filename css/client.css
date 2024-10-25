@@ -33,3 +33,89 @@ h1{
 .contactbar li{
     float: left;
 }
+
+.fa-sharp.fa-solid.fa-phone.fa-5x{
+    color:green;
+    border: 3px solid blueviolet; 
+    padding: 20px; 
+    border-radius: 10px; 
+    display: inline-flex; 
+    gap: 20px; 
+    background-color: #f0f0f0; 
+}
+.fa-sharp.fa-solid.fa-phone.fa-5x:hover{
+    color:greenyellow;
+}
+.fa-solid.fa-user{
+    color:blue;
+    font-size:5em;
+    border: 3px solid blueviolet; 
+    padding: 25px; 
+    border-radius: 10px; 
+    display: inline-flex; 
+    gap: 15px; 
+    background-color: #f0f0f0; 
+
+}
+.fa-solid.fa-user:hover{
+    color:darkblue;
+}
+.details {
+    display: none; 
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+
+.icon-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px; 
+}
+.fa-solid.fa-screwdriver-wrench{
+    color: black;
+    font-size:5em;
+    border: 3px solid blueviolet; 
+    padding: 25px; 
+    border-radius: 10px; 
+    display: inline-flex; 
+    gap: 20px; 
+    background-color: #f0f0f0;
+    
+}
+.fa-solid.fa-screwdriver-wrench:hover{
+    color: wheat;
+}
+
+
+.fa-solid.fa-receipt{
+    color:red;
+    font-size:5em;
+    border: 3px solid blueviolet; 
+    padding: 25px; 
+    border-radius: 10px; 
+    display: inline-flex; 
+    gap: 20px; 
+    background-color: #f0f0f0;
+}
+.fa-solid.fa-receipt:hover{
+    color:darkred;
+}
+
+
+.fa-solid.fa-magnifying-glass:hover{
+    color: darkgray;
+}
+.fa-solid.fa-business-time:hover{
+    color:darkgray;
+}
+.fa-solid.fa-ban:hover{
+    color:darkgray;
+}
+.fa-solid.fa-clock-rotate-left:hover{
+    color: darkgray;
+}
