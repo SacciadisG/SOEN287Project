@@ -39,3 +39,50 @@ button {
     margin-top: 10px;
     cursor: pointer;
 }
+
+
+.background-service-view {
+    background-color: gray;
+}
+
+.view-service {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 3px solid black;
+    padding: 10px;
+    background-color: white;
+}
+
+.view-past {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    border: 1px solid black;
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 20px;
+}
+
+.view-present {
+    margin-top: 50px;
+    margin-bottom: 50px; 
+    border: 1px solid black;
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 20px;
+}
+
+.view-future {
+    margin-top: 50px;
+    margin-bottom: 50px; 
+    border: 1px solid black;
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 20px;
+}
+
+.receipt{
+    background-color: white;
+}
