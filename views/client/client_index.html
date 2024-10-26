@@ -3,3 +3,93 @@ This is Sith's responsibility.
 Feel free to look at Greg's pages (Login/Register/Business_Index)
 for reference; it's best to have our styling look the same.
  -->
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Dashboard</title>
+    <link rel="stylesheet" href="/css/client.css">
+    <script src="client.js" defer></script>
+    <script src="https://kit.fontawesome.com/7482e9f3eb.js" crossorigin="anonymous"></script>
+   
+</head>
+
+<body>
+    <h1>Welcome To The Client Dashboard!</h1>
+    <div>
+        <a href="/views/login.html"><button class="logOff">Log Off</button></a>
+    </div>
+
+    <nav class="contactbar">
+        <ul>
+            <li><a href="">Home</a></li>
+            <li><a href="">About me</a></li>
+            <li><a href="">Contact me</a></li>
+        </ul>
+    </nav>
+
+    <div class="icon-container">
+        <div class="icon-item">
+            <a href="tel:"><i class="fa-sharp fa-solid fa-phone fa-5x"></i></a>
+            <p>Communication</p>
+        </div>
+        <div class="icon-item">
+            <a href="#" onclick="toggleDetails('user-details')">
+                <i class="fa-solid fa-user fa-5x"></i>
+            </a>
+            <p>User Profile</p>
+            <div class="details" id="user-details">
+                <p> Profile Settings</p>
+                <p>Account Info</p>
+                <p>Security Settings</p>
+            </div>
+        </div>
+        <div class="icon-item">
+            <a href="#" onclick="toggleDetails('services-details')">
+                <i class="fa-solid fa-screwdriver-wrench fa-5x"></i>
+            </a>
+            <p>Services</p>
+            <div class="details" id="services-details">
+                <i class="fa-solid fa-magnifying-glass">  Search for offered services</i>
+                <br>
+                <br>
+                <a href="/views/client/services_request.html">
+                    <i class="fa-solid fa-business-time">  Request specific services</i>
+                </a>
+                <br>
+                <br>
+                <i class="fa-solid fa-ban"> Cancel a service</i>
+                <br>
+                <br>
+                <a href="/views/client/services_view.html">
+                    <i class="fa-solid fa-clock-rotate-left"> overview of past and future services</i>
+                </a>  
+            </div>
+        </div>    
+        <div class="icon-item">
+            <a href="/views/client/receipts_view.html">
+                <i class="fa-solid fa-receipt"></i>
+            </a>
+            <p>bills and receipts</p>
+        </div>
+        <div class="icon-item">
+            <a href="notification.html">
+                <i class="fa-solid fa-bell"></i>
+                <p>Notifications</p></a>
+           
+        </div>
+
+        <div class="icon-item">
+            <a href="/views/client/faq.html">
+                <i class="fa-solid fa-info"></i>
+                <p>FAQs and Help Section</p>
+            </a>
+        </div>
+    </div>
+
+
+</body>
+</html>
+
+ 
