@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modify Services</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Manage Your Services</h1>
+        <p>Here are the services you currently offer:</p>
+
+        <div id="service-list">
+            <div class="service" id="service-1">
+                <div class="service-name">Service:</div>
+                <p class="service-description">Exterior Window Cleaning</p>
+                <div class="options">
+                    <button class="option-box" onclick="modifyService('service-1')">Modify</button>
+                    <button class="option-box" onclick="removeService('service-1')">Delete</button>
+                </div>
+            </div>
+
+            <div class="service" id="service-2">
+                <div class="service-name">Service:</div>
+                <p class="service-description">Interior Window Cleaning</p>
+                <div class="options">
+                    <button class="option-box" onclick="modifyService('service-2')">Modify</button>
+                    <button class="option-box" onclick="removeService('service-2')">Delete</button>
+                </div>
+            </div>
+
+            <div class="service" id="service-3">
+                <div class="service-name">Service:</div>
+                <p class="service-description">Package: Exterior/Interior Window Cleaning</p>
+                <div class="options">
+                    <button class="option-box" onclick="modifyService('service-3')">Modify</button>
+                    <button class="option-box" onclick="removeService('service-3')">Delete</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="options" style="margin-top: 30px;">
+            <button class="option-box" onclick="addService()">Add New Service</button>
+        </div>
+    </div>
+
+    <div class="options" style="margin: 20px auto; text-align: center;">
+        <button class="go-back-button" onclick="goBack()">Go Back</button>
+    </div>
+
+    <script>
+        function modifyService(serviceId) {
+            const serviceElement = document.getElementById(serviceId);
+            const serviceDescriptionElement = serviceElement.querySelector('.service-description');
+            const currentServiceName = serviceDescriptionElement.textContent;
+
+            // Prompt the user for the new service name
+            const newServiceName = prompt("Enter the new name for the service:", currentServiceName);
+            if (newServiceName) {
+                serviceDescriptionElement.textContent = newServiceName; // Update the service name displayed
+                alert("Service has been updated to: " + newServiceName);
+            }
+        }
+
+        function removeService(serviceId) {
+            if (confirm("Are you sure you want to remove this service?")) {
+                const serviceElement = document.getElementById(serviceId);
+                serviceElement.parentNode.removeChild(serviceElement); // Remove the service from the DOM
+                alert("Service has been removed.");
+            }
+        }
+
+        function addService() {
+            // Prompt the user for the new service name
+            const newServiceName = prompt("Enter the name of the new service:");
+            if (newServiceName) {
+                // Create a new service element
+                const newServiceId = 'service-' + (document.querySelectorAll('.service').length + 1); // Unique ID
+                const newServiceHtml = `
+                    <div class="service" id="${newServiceId}">
+                        <div class="service-name">Service:</div>
+                        <p class="service-description">${newServiceName}</p>
+                        <div class="options">
+                            <button class="option-box" onclick="modifyService('${newServiceId}')">Modify</button>
+                            <button class="option-box" onclick="removeService('${newServiceId}')">Delete</button>
+                        </div>
+                    </div>
+                `;
+
+                // Append the new service element to the service list
+                document.getElementById('service-list').insertAdjacentHTML('beforeend', newServiceHtml);
+                alert("New service has been added: " + newServiceName);
+            }
+        }
+
+        // Function to go back to the previous page
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
+</body>
+</html>
