@@ -7,27 +7,44 @@
     <link rel="stylesheet" href="/css/faq.css">
 </head>
 <body>
-    <div class="faq_container">
+    <div class="container">
         <h2 class="title">FAQ</h2>
         <p class="header">Find the answers for the most frequently asked questions below</p>
         <br>
         <div class="first_question">
-            <h3 id="h3">Are the services free?</h3>
-            <p id="p">Absolutely Not! You have to pay the compagnie choosen the fees that they have marked on the website
+            <h3 >Are the services free?</h3>
+            <p >Absolutely Not! You have to pay the compagnie choosen the fees that they have marked on the website
                 and the prices are non negociable.
             </p>
             <br>
-            <h3 id="h3">How do I pay?</h3>
-            <p id="p">
+            <h3 >How do I pay?</h3>
+            <p >
                 Yes. Go to the billing section of your dashboard and update your payment information. 
             </p>
             <br>
-            <h3 id="h3"> A question that is longer then the previous one?</h3>
-            <p id="p">Yes, it is possible! You can cancel your subscription anytime in your account. Once the subscription 
+            <h3 > A question that is longer then the previous one?</h3>
+            <p >Yes, it is possible! You can cancel your subscription anytime in your account. Once the subscription 
                 is cancelled, you will not be charged next month.</p>
         </div>
     </div>
-    
+    <div class="options" style="margin: 20px auto; text-align: center;">
+        <button class="go-back-button" onclick="goBack()">Go Back</button>
+    </div>    
+
+    <script>
+        function removeRequestedService(serviceId) {
+            if (confirm("Are you sure you want to remove this service?")) {
+                const serviceElement = document.getElementById(serviceId);
+                serviceElement.parentNode.removeChild(serviceElement); // Remove the service from the DOM
+                alert("Service has been removed from your requests.");
+            }
+        }
+
+        // Function to go back to the previous page
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 
 </body>
   

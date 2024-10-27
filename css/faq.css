@@ -1,24 +1,39 @@
 .title{
     text-align: center;
-    color: rgb(34, 34, 194);
-    background-color: grey; 
+    font-family: Arial, Helvetica, sans-serif;
+     
 }
 .header{
     text-align: center;
-    color:antiquewhite
-}
-.faq_container{
-    background-color:gray;
-    padding: 50px;
-    padding-bottom: 200px;
-    margin: 50px;
-    border: 3px solid silver;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-#h3{
-    color: rgb(34, 34, 194);
-
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
 }
-#p{
-    color: antiquewhite;
+
+.container{
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.go-back-button {
+    background-color: #343a40; 
+    color: white; 
+    padding: 15px 30px; 
+    border: none; 
+    border-radius: 6px; 
+    cursor: pointer; 
+    font-size: 18px; 
+    transition: background-color 0.3s ease; 
+}
+
+.go-back-button:hover {
+    background-color: #23272b; 
 }

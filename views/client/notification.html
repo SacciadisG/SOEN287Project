@@ -25,6 +25,23 @@
 <div class="information">
     <p>Information</p>
 </div>
-    
+<div class="options" style="margin: 20px auto; text-align: center;">
+    <button class="go-back-button" onclick="goBack()">Go Back</button>
+</div>    
+
+<script>
+    function removeRequestedService(serviceId) {
+        if (confirm("Are you sure you want to remove this service?")) {
+            const serviceElement = document.getElementById(serviceId);
+            serviceElement.parentNode.removeChild(serviceElement); // Remove the service from the DOM
+            alert("Service has been removed from your requests.");
+        }
+    }
+
+    // Function to go back to the previous page
+    function goBack() {
+        window.history.back();
+    }
+</script>
 </body>
 </html>
