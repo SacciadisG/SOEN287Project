@@ -1,0 +1,10 @@
+
+The second deliverable is all about the backend (everything about the logic/manipulation of data).
+
+-Database setup (locally)
+-Database management 
+-User authentication (with signup and login)
+-User data (to get the user role/services)
+-Change on some of the webpages to use the data from the database (instead of hardcoding data)
+
+
