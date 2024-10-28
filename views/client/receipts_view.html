@@ -4,65 +4,89 @@ Feel free to look at Greg's pages (Login/Register/Business_Index)
 for reference; it's best to have our styling look the same.
  -->
 
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/standard.css">
     <title>Receipt View</title>
 </head>
-<body class="background-service-view">
+
+<body class="container">
     <div class="receipt">
-    <h1>Receipt</h1>
-    <div class="receipt-info">
-        
+        <h1>Receipt</h1>
+        <div class="receipt-info">
+
             <h2>Company name</h2>
             <h3>Contact Info</h3>
-            <p> 
+            <p>
                 Address : </br>
-                Email   : </br>
-                Phone   : </br>
+                Email : </br>
+                Phone : </br>
             </p>
-        
-    </div>
-    <div class="receipt-table">
-        <div id="table">
-            <table>
-                <tr class="tabletitle">
-                    <td class="item"><h2>Service</h2></td>
-                    <td class="Hours"><h2>Date of purchased</h2></td>
-                    <td class="Rate"><h2>Total</h2></td>
-                </tr>
-                <tr class="service">
-                    <td class="tableitem"><p class="itemtext">Regular interior cleaning</p></td>
-                    <td class="tableitem"><p class="itemtext">01-01-2000</p></td>
-                    <td class="tableitem"><p class="itemtext">100</p></td>
-                </tr>
-    
-                <tr class="service">
-                    <td class="tableitem"><p class="itemtext">Major interior cleaning</p></td>
-                    <td class="tableitem"><p class="itemtext">31-10-2024</p></td>
-                    <td class="tableitem"><p class="itemtext">200</p></td>
-                </tr>
-    
-                <tr class="service">
-                    <td class="tableitem"><p class="itemtext">Exterior cleaning</p></td>
-                    <td class="tableitem"><p class="itemtext">01-01-2030</p></td>
-                    <td class="tableitem"><p class="itemtext">300</p></td>
+
+        </div>
+        <div class="receipt-table">
+            <div id="table">
+                <table>
+                    <tr class="tabletitle">
+                        <td class="services">
+                            <h2>Service</h2>
+                        </td>
+                        <td class="dates">
+                            <h2>Date of purchased</h2>
+                        </td>
+                        <td class="cost">
+                            <h2>Cost</h2>
+                        </td>
+                    </tr>
+                    <tr class="service">
+                        <td class="tableitem">
+                            <p class="itemtext">Regular interior cleaning</p>
+                        </td>
+                        <td class="tableitem">
+                            <p class="itemtext">01-01-2000</p>
+                        </td>
+                        <td class="tableitem">
+                            <p class="itemtext">100</p>
+                        </td>
                     </tr>
 
-    
-            </table>
-        </div>
+                    <tr class="service">
+                        <td class="tableitem">
+                            <p class="itemtext">Major interior cleaning</p>
+                        </td>
+                        <td class="tableitem">
+                            <p class="itemtext">31-10-2024</p>
+                        </td>
+                        <td class="tableitem">
+                            <p class="itemtext">200</p>
+                        </td>
+                    </tr>
+
+                    <tr class="service">
+                        <td class="tableitem">
+                            <p class="itemtext">Exterior cleaning</p>
+                        </td>
+                        <td class="tableitem">
+                            <p class="itemtext">01-01-2030</p>
+                        </td>
+                        <td class="tableitem">
+                            <p class="itemtext">300</p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
             <h1>Total: 400</h1>
-    
+
             <div class="receipt-bottom">
                 <p>Thank you for your puchase</p>
             </div>
-            
-            </div>
         </div>
     </div>
-</body>  
+    </div>
+</body>
+
 </html>
