@@ -9,39 +9,29 @@ for reference; it's best to have our styling look the same.
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>Requested Services</title>
-     <link rel="stylesheet" href="services_request.css">
+     <link rel="stylesheet" href="/css/services_request.css">
  </head>
  
  <body>
  
      <div class="container">
-         <h1>Manage Requested Services</h1>
-         <p>Here are the services you have requested:</p>
+         <h1>Request A Specific Service</h1>
+         <p>Write a small description about a specific service that you are looking for :</p>
  
          <div id="requested-service-list">
              <div class="service" id="requested-service-1">
                  <div class="service-name">Service:</div>
-                 <p class="service-description">Exterior Window Cleaning</p>
+
+                 <textarea class="form">
+
+                 </textarea>
+                 
                  <div class="options">
-                     <button class="option-box" onclick="removeRequestedService('requested-service-1')">Remove</button>
+                     <button class="option-box" onclick="">Send</button>
                  </div>
              </div>
  
-             <div class="service" id="requested-service-2">
-                 <div class="service-name">Service:</div>
-                 <p class="service-description">Interior Window Cleaning</p>
-                 <div class="options">
-                     <button class="option-box" onclick="removeRequestedService('requested-service-2')">Remove</button>
-                 </div>
-             </div>
- 
-             <div class="service" id="requested-service-3">
-                 <div class="service-name">Service:</div>
-                 <p class="service-description">Package: Exterior/Interior Window Cleaning</p>
-                 <div class="options">
-                     <button class="option-box" onclick="removeRequestedService('requested-service-3')">Remove</button>
-                 </div>
-             </div>
+             
          </div>
      </div>
  
@@ -50,13 +40,7 @@ for reference; it's best to have our styling look the same.
      </div>    
  
      <script>
-         function removeRequestedService(serviceId) {
-             if (confirm("Are you sure you want to remove this service?")) {
-                 const serviceElement = document.getElementById(serviceId);
-                 serviceElement.parentNode.removeChild(serviceElement); // Remove the service from the DOM
-                 alert("Service has been removed from your requests.");
-             }
-         }
+         
  
          // Function to go back to the previous page
          function goBack() {

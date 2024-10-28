@@ -5,14 +5,67 @@ body{
     padding: 0;
 }
 
+form {
+    background: white;
+    padding: 20px 250px;
+    box-shadow: 1px 2px 10px rgba(0,0,0,0.2);
+    width: 200px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+h1 {
+    padding: 20px 0;
+    margin: 0;
+}
+
+
+
+label {
+    font-size: 15px;
+    color: black;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    display: block;
+}
+
+input {
+    width: 100%;
+}
+
+button {
+    margin-top: 10px;
+    cursor: pointer;
+}
+.box{
+    display:flex;
+    margin-left: 100px auto;
+}
 .container{
     max-width: 800px;
-    margin: 50px auto;
+    margin: 10px auto;
     background-color: white;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);  
 }
+
+
+.container #name{
+    display:flex;
+    gap: 10px;
+    
+}
+p{
+    margin-top: 21px;
+    color: grey;
+}
+
+.container #name_pic{
+    text-align: center;
+    
+}
+
 
 .options{
     display: flex;
@@ -81,13 +134,4 @@ button.option-box:hover {
 
 .go-back-button:hover {
     background-color: #23272b; 
-}
-
-.form{
-    background: white;
-    padding: 20px 250px;
-    box-shadow: 1px 2px 10px rgba(0,0,0,0.2);
-    width: 265px;
-    border-radius: 10px;
-    text-align: center;
 }
