@@ -14,24 +14,27 @@ This is Greg's responsibility.
     <!-- This is the navbar -->
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">*Business Name*</a>
+          <a class="navbar-brand" href="./business_index.html">Business Name</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" 
           aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="display:flex; margin-left: auto">
             <div class="navbar-nav">
-              <a class="nav-link active" href="./business_index">Home</a>
-              <a class="nav-link" href="./services_requested">See Requested Services</a>
-              <a class="nav-link" href="./services_modify">Modify Services</a>
-              <a class="nav-link" href="./business_edit">Edit Business Information</a>
-              <button btn btn-danger>Logout</button>
+              <a class="nav-link active" href="./business_index.html">Home</a>
+              <a class="nav-link" href="./services_requested.html">See Requested Services</a>
+              <a class="nav-link" href="./services_modify.html">Modify Services</a>
+              <a class="nav-link" href="./business_edit.html">Edit Business Information</a>
             </div>
+            <button class="btn btn-danger" style="display:flex; margin-left: auto">Logout</button>
           </div>
         </div>
       </nav>
 
-    <h1>Business Dashboard</h1>
+    <div>
+        <h1> Business Dashboard </h1>
+    </div>
+    
     <!-- Bootstrap scripts should be at the end, so as to not clutter the rest of the page's code-->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" 
     integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" 
