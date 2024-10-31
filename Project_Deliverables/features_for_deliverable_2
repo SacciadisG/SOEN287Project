@@ -1,10 +1,11 @@
+# The second deliverable is all about the backend (everything about the logic/manipulation of data).
 
-The second deliverable is all about the backend (everything about the logic/manipulation of data).
-
--Database setup (locally)
--Database management 
--User authentication (with signup and login)
--User data (to get the user role/services)
--Change on some of the webpages to use the data from the database (instead of hardcoding data)
-
+- Database setup (locally)
+- Database management 
+- User authentication (with signup and login)
+- User data (to get the user role/services)
+- Change on some of the webpages to use the data from the database (instead of hardcoding data)
+- Introducing several features on the client side (that rely on input data, retrieved a database)
+- Contact customer page will be implemented in deliverable 2
+- Several client account/profile features will be implemented in deliverable 2
 
