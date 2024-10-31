@@ -5,22 +5,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/standard.css">
+    <link rel="stylesheet" href="/css/style.css">
     <title>Login Page</title>
 </head>
+<body>
+<div class="container">
 <h1>Login Page</h1>
-    <form> <!-- Add action & method afterwards when routes enabled -->
-        <div>
-            <label for="username">Enter username:</label>
-            <input type="text" name="username" id="username" placeholder="username" required> 
+        <div class="service"> <!-- Add action & method afterwards when routes enabled -->
+            <h2>Client Login</h2>
+            <div class="option">
+                <label for="username">Enter username:</label>
+                <input type="text" name="username" id="username" placeholder="Username"> 
+            </div>
+            <div class="option" style="padding-top: 5px;">
+                <label for="password" style="padding-right: 2px;">Enter password:</label>
+                <input type="password" name="password" id="password" placeholder="Password"> 
+            </div>
+            <div class="option" style="display: flex; justify-content: center; padding-top: 10px;">
+                <button class="option-box" onclick="location.href='./client/client_index.html'">Login</button>
+            </div>
+        </div>
+        <div class="service"> <!-- Add action & method afterwards when routes enabled -->
+            <h2>Business Login</h2>
+            <div class="option">
+                <label for="username">Enter username:</label>
+                <input type="text" name="username" id="username" placeholder="Username"> 
+            </div>
+            <div class="option" style="padding-top: 5px;">
+                <label for="password" style="padding-right: 2px;">Enter password:</label>
+                <input type="password" name="password" id="password" placeholder="Password"> 
+            </div>
+            <div class="option" style="display: flex; justify-content: center; padding-top: 10px;">
+                <button class="option-box" onclick="location.href='./business/business_index.html'">Login</button>
+            </div>
         </div>
         <div>
-            <label for="password">Enter password:</label>
-            <input type="password" name="password" id="password" placeholder="password" required> 
+            <p class="service-description">Don't have an account? Click below to create one!</p>
+            <button class="go-back-button" onclick="location.href='./register.html'">Register</button>
         </div>
-        <button>Login</button>
-    </form>
-    <div>
-        <a href="register.html">Register Page</a>
-    </div>
+</div>
+
+
+</div>
+</body>
 </html>

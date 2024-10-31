@@ -1,29 +1,38 @@
 <!-- This is Greg's responsibility. -->
 
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/standard.css">
-    <title>Register</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Login Page</title>
 </head>
 <body>
-    <h1>Create An Account!</h1>
-        <form> <!-- Add action & method afterwards when routes enabled -->
-            <div>
-                <label for="username">Enter Username:</label>
-                <input type="text" name="username" id="username" placeholder="Username" required> 
+<div class="container">
+<h1>Register</h1>
+        <div class="service"> <!-- Add action & method afterwards when routes enabled -->
+            <h2>Create an Account!</h2>
+            <div class="option">
+                <label for="username">Enter username:</label>
+                <input type="text" name="username" id="username" placeholder="Username"> 
             </div>
-            <div>
-                <label for="password">Enter Password:</label>
-                <input type="password" name="password" id="password" placeholder="Password" required> 
+            <div class="option" style="padding-top: 5px;">
+                <label for="password" style="padding-right: 2px;">Enter password:</label>
+                <input type="password" name="password" id="password" placeholder="Password"> 
             </div>
-            <button class="option-box">Register</button> 
-        </form>
-        <br>
-        <div>
-            <a class="go-back-button" href="login.html">Login Page</a>
+            <div class="option" style="display: flex; justify-content: center; padding-top: 10px;">
+                <button class="option-box" onclick="location.href='./login.html'">Register</button>
+            </div>
         </div>
+        
+        <div>
+            <p class="service-description">Already Have an Account? Login!</p>
+            <button class="go-back-button" onclick="location.href='./login.html'">Login</button>
+        </div>
+</div>
+
+
+</div>
 </body>
 </html>
