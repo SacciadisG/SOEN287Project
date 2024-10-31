@@ -10,19 +10,20 @@
 </head>
 <body>
     <h1>Create An Account!</h1>
-    <form> <!-- Add action & method afterwards when routes enabled -->
+        <form> <!-- Add action & method afterwards when routes enabled -->
+            <div>
+                <label for="username">Enter Username:</label>
+                <input type="text" name="username" id="username" placeholder="Username" required> 
+            </div>
+            <div>
+                <label for="password">Enter Password:</label>
+                <input type="password" name="password" id="password" placeholder="Password" required> 
+            </div>
+            <button class="option-box">Register</button> 
+        </form>
+        <br>
         <div>
-            <label for="username">Enter username:</label>
-            <input type="text" name="username" id="username" placeholder="username" required> 
+            <a class="go-back-button" href="login.html">Login Page</a>
         </div>
-        <div>
-            <label for="password">Enter password:</label>
-            <input type="password" name="password" id="password" placeholder="password" required> 
-        </div>
-        <button>Register</button> 
-    </form>
-    <div>
-        <a href="login.html">Login Page</a>
-    </div>
 </body>
 </html>
