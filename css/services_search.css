@@ -82,3 +82,14 @@ button.option-box:hover {
 .go-back-button:hover {
     background-color: #23272b; 
 }
+
+
+#details {
+    display: none; 
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}

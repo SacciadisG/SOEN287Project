@@ -82,3 +82,12 @@ button.option-box:hover {
 .go-back-button:hover {
     background-color: #23272b; 
 }
+
+.form{
+    background: white;
+    padding: 20px 250px;
+    box-shadow: 1px 2px 10px rgba(0,0,0,0.2);
+    width: 265px;
+    border-radius: 10px;
+    text-align: center;
+}

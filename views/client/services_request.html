@@ -3,3 +3,50 @@ This is Sith's responsibility.
 Feel free to look at Greg's pages (Login/Register/Business_Index)
 for reference; it's best to have our styling look the same.
  -->
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Requested Services</title>
+     <link rel="stylesheet" href="/css/services_request.css">
+ </head>
+ 
+ <body>
+ 
+     <div class="container">
+         <h1>Request A Specific Service</h1>
+         <p>Write a small description about a specific service that you are looking for :</p>
+ 
+         <div id="requested-service-list">
+             <div class="service" id="requested-service-1">
+                 <div class="service-name">Service:</div>
+
+                 <textarea class="form">
+
+                 </textarea>
+                 
+                 <div class="options">
+                     <button class="option-box" onclick="">Send</button>
+                 </div>
+             </div>
+ 
+             
+         </div>
+     </div>
+ 
+     <div class="options" style="margin: 20px auto; text-align: center;">
+         <button class="go-back-button" onclick="goBack()">Go Back</button>
+     </div>    
+ 
+     <script>
+         
+ 
+         // Function to go back to the previous page
+         function goBack() {
+             window.history.back();
+         }
+     </script>
+ 
+ </body>
+ </html>

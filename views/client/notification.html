@@ -7,24 +7,46 @@
     <link rel="stylesheet" href="/css/notification.css">
 </head>
 <body>
-<div class="container">
-    <h3>Notifications</h3>
-</div>
+
+    <h1>Notifications</h1>
+
 <div class="error">
-    <p>Error Alert:</p>
+    <p class=container>Error Alert:</p>
+    <button class="option-box" onclick="removeService('service-1')">x</button>
 </div>
 
 <div class="success">
     <p>Success Alert:</p>
+    <button class="option-box" onclick="removeService('service-2')">x</button>
 </div>
 
 <div class="warning">
-    <p>Warning Alert</p>
+    <p>Warning Alert:</p>
+    <button class="option-box" onclick="removeService('service-3')">x</button>
 </div>
 
 <div class="information">
-    <p>Information</p>
+    <p>Information:</p>
+    <button class="option-box" onclick="removeService('service-4')">x</button>
 </div>
-    
+
+<div class="options" style="margin: 20px auto; text-align: center;">
+    <button class="go-back-button" onclick="goBack()">Go Back</button>
+</div>    
+
+<script>
+    function removeRequestedService(serviceId) {
+        if (confirm("Are you sure you want to remove this service?")) {
+            const serviceElement = document.getElementById(serviceId);
+            serviceElement.parentNode.removeChild(serviceElement); // Remove the service from the DOM
+            alert("Service has been removed from your requests.");
+        }
+    }
+
+    // Function to go back to the previous page
+    function goBack() {
+        window.history.back();
+    }
+</script>
 </body>
 </html>

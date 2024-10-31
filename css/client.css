@@ -1,3 +1,15 @@
+/*Standard Css*/
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+
+/*Personal Css used*/
 h1{
     text-align: center;
 }
@@ -7,6 +19,7 @@ h1{
     top: 20px;
     right: 10px;
     padding: 10px 20px;
+    font-family: Arial, Helvetica, sans-serif;
     background-color: darkgray;
     color: white;
     border: none;
@@ -16,6 +29,7 @@ h1{
 .contactbar ul{
     list-style-type: none;
     background-color: blueviolet;
+    font-family: Arial, Helvetica, sans-serif;
     padding: 0px;
     margin: 0px;
     overflow: hidden;
@@ -36,7 +50,7 @@ h1{
 
 .fa-sharp.fa-solid.fa-phone.fa-5x{
     color:green;
-    border: 3px solid blueviolet; 
+    border: 3px solid black; 
     padding: 20px; 
     border-radius: 10px; 
     display: inline-flex; 
@@ -53,7 +67,7 @@ h1{
 .fa-solid.fa-user{
     color:blue;
     font-size:5em;
-    border: 3px solid blueviolet; 
+    border: 3px solid black; 
     padding: 25px; 
     border-radius: 10px; 
     display: inline-flex; 
@@ -70,11 +84,12 @@ h1{
 }
 .details {
     display: none; 
-    margin-top: 10px;
-    padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    background-color: #f9f9f9;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
 }
 
 
@@ -94,7 +109,7 @@ h1{
 .fa-solid.fa-screwdriver-wrench{
     color: black;
     font-size:5em;
-    border: 3px solid blueviolet; 
+    border: 3px solid black; 
     padding: 25px; 
     border-radius: 10px; 
     display: inline-flex; 
@@ -114,7 +129,7 @@ h1{
 .fa-solid.fa-receipt{
     color:red;
     font-size:5em;
-    border: 3px solid blueviolet; 
+    border: 3px solid black; 
     padding: 25px; 
     border-radius: 10px; 
     display: inline-flex; 
@@ -129,23 +144,10 @@ h1{
     color:darkred;
 }
 
-
-.fa-solid.fa-magnifying-glass:hover{
-    color: darkgray;
-}
-.fa-solid.fa-business-time:hover{
-    color:darkgray;
-}
-.fa-solid.fa-ban:hover{
-    color:darkgray;
-}
-.fa-solid.fa-clock-rotate-left:hover{
-    color: darkgray;
-}
 .fa-solid.fa-bell{
     color:rgb(53, 52, 52);
     font-size:5em;
-    border: 3px solid blueviolet; 
+    border: 3px solid black; 
     padding: 25px; 
     border-radius: 10px; 
     display: inline-flex; 
@@ -164,7 +166,7 @@ h1{
 .fa-solid.fa-info{
     color: darkblue;
     font-size: 4em; /* Increase the icon size */
-    border: 3px solid blueviolet; 
+    border: 3px solid black; 
     padding: 40px; /* Adjust padding for more space */
     border-radius: 10px; 
     display: inline-flex; 

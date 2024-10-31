@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search for Services</title>
+    <link rel="stylesheet" href="/css/services_search.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Search for Services</h1>
+        <p>Here are the services currently offered:</p>
+
+        <div id="service-list">
+            <div class="service" id="service-1">
+                <div class="service-name">Service:</div>
+                <p class="service-description">Exterior Window Cleaning</p>
+                <div class="options">
+                    <button class="option-box" onclick="">Choose</button>
+                </div>
+            </div>
+
+            <div class="service" id="service-2">
+                <div class="service-name">Service:</div>
+                <p class="service-description">Interior Window Cleaning</p>
+                <div class="options">
+                    <button class="option-box" onclick="">Choose</button>
+                </div>
+            </div>
+
+            <div class="service" id="service-3">
+                <div class="service-name">Service:</div>
+                <p class="service-description">Package: Exterior/Interior Window Cleaning</p>
+                <div class="options">
+                    <button class="option-box" onclick="">Choose</button>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+
+    <div class="options" style="margin: 20px auto; text-align: center;">
+        <button class="go-back-button" onclick="goBack()">Go Back</button>
+    </div>
+
+    <script>
+        
+
+        // Function to go back to the previous page
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
+</body>
+</html>

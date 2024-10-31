@@ -13,9 +13,6 @@ form {
     border-radius: 10px;
     text-align: center;
 }
-.container{
-    margin-right: 400px; 
-}
 
 h1 {
     padding: 20px 0;
@@ -23,6 +20,7 @@ h1 {
     text-align: center;
 
 }
+
 
 label {
     font-size: 15px;
@@ -41,18 +39,40 @@ button {
     cursor: pointer;
 }
 
+.container{
+    display: flex;
+    max-width: 800px;
+    margin: 40px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);  
+}
+
+
+.container #description{
+    display:flex;
+    gap: 10px;
+    margin-left: 400px;
+
+}
+
+
 .options{
+    margin-right: 400px;
     display: flex;
     justify-content: space-around;
     margin-top: 30px;
 }
-
+ 
 .option-box{
-    display: flex;
-    margin-left: 780px;
-    background-color: gray;
+    margin-left: 400px;
+    text-align: center;
+    background-color: #007bff;
     color: white;
+    padding: 15px 30px;
     border-radius: 6px;
+    width: 200px;
     transition: background-color 0.3s ease;
 }
 
@@ -67,8 +87,9 @@ button {
 }
 
 button.option-box {
-    background-color: grey; 
-    color: white;  
+    background-color: #007bff; 
+    color: white; 
+    padding: 15px 30px; 
     border: none; 
     border-radius: 6px; 
     cursor: pointer; 
@@ -107,52 +128,11 @@ button.option-box:hover {
 .go-back-button:hover {
     background-color: #23272b; 
 }
-.error{
-    max-width: 800px;
-    margin: 50px auto;
-    background-color: rgba(231, 5, 5, 0.945);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(247, 2, 2, 0.1);
+.small-image{
+    width: 100px; 
+    height: auto; 
+}
+.exp{
+    display: flex;
     
-}
-
-.success{
-    max-width: 800px;
-    margin: 50px auto;
-    background-color: rgb(15, 185, 15);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-.warning{
-    max-width: 800px;
-    margin: 50px auto;
-    background-color: rgb(214, 218, 8);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(226, 230, 15, 0.1);
-}
-
-.information{
-    max-width: 800px;
-    margin: 50px auto;
-    background-color: rgb(15, 174, 223);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-.go-back-button {
-    background-color: #343a40; 
-    color: white; 
-    padding: 15px 30px; 
-    border: none; 
-    border-radius: 6px; 
-    cursor: pointer; 
-    font-size: 18px; 
-    transition: background-color 0.3s ease; 
-}
-
-.go-back-button:hover {
-    background-color: #23272b; 
 }
