@@ -1,47 +1,129 @@
-<!-- 
-This is Greg's responsibility.
- -->
- <!DOCTYPE html>
- <html lang="en">
- <head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Edit Business Information</title>
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
-     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> 
- </head>
- <body>
-     <!-- This is the navbar -->
-     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
-         <div class="container-fluid">
-           <a class="navbar-brand" href="#">*Business Name*</a>
-           <button class="btn btn-danger" style="display:flex; margin-left: auto">Logout</button>
-           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" 
-           aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-             <span class="navbar-toggler-icon"></span>
-           </button>
-           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-             <div class="navbar-nav">
-               <a class="nav-link active" href="./business_index.html">Home</a>
-               <a class="nav-link" href="./services_requested.html">See Requested Services</a>
-               <a class="nav-link" href="./services_modify.html">Modify Services</a>
-               <a class="nav-link" href="./business_edit.html">Edit Business Information</a>
- 
-             </div>
-           </div>
-         </div>
-       </nav>
- 
-     <div>
-         <h1> Edit Business Information </h1>
-     </div>
-     
-     <!-- Bootstrap scripts should be at the end, so as to not clutter the rest of the page's code-->
-     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" 
-     integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" 
-     crossorigin="anonymous"></script>
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" 
-     integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" 
-     crossorigin="anonymous"></script>
- </body>
- </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modify Services</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> 
+    <link rel="stylesheet" href="../../css/style.css">
+    <!-- For the css, you need to go two directories up, hence the double "../" -->
+</head>
+
+<body>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="./business_index.html">Business Name</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" 
+          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="display:flex; margin-left: auto">
+            <div class="navbar-nav">
+              <a class="nav-link active" href="./business_index.html">Home</a>
+              <a class="nav-link" href="./services_requested.html">See Requested Services</a>
+              <a class="nav-link" href="./services_modify.html">Modify Services</a>
+              <a class="nav-link" href="./business_edit.html">Edit Business Information</a> 
+            </div>
+            <button class="btn btn-danger" style="display:flex; margin-left: auto" onclick="location.href='../login.html'">Logout</button> 
+          </div>
+        </div>
+      </nav>
+    <div class="container">
+        <h1>Edit Business Information</h1>
+
+        <div id="service-list">
+            <div class="service" id="contact-information">
+                <h3>Contact Information</h3>
+                <div>
+                  <p class="service-description">
+                    <b>Company Name:</b> Business Name <br>
+                    <b>Address:</b> 123 Concordia Street <br>
+                    <b>Postal Code:</b> A1B 2C3 <br>
+                    <b>Location:</b> Montreal, QC <br>
+                    <b>Email:</b> business.email@fakeemail.com <br>
+                  </p>
+                  <div class="options">
+                      <button class="option-box">Edit Contact Info</button>
+                  </div>
+                </div>
+            </div>
+            <div class="service" id="company-logo">
+              <h3>Company Logo</h3>
+                <img src="/css/Images/profile_pic.jpg" class="small-image">
+                <div class="options">
+                  <button class="option-box">Modify Logo</button>
+              </div>
+            </div>
+            <div class="service" id="services-offered">
+              <h3>Services Offered</h3>
+              <p class="service-description">To view and modify the services you offer, click below:</p>
+                <div class="options">
+                  <button class="option-box" onclick="location.href='./services_modify.html'">Modify Services</button>
+              </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="options" style="margin: 20px auto; text-align: center;">
+        <button class="go-back-button" onclick="goBack()">Go Back</button>
+    </div>
+
+    <script>
+        function modifyService(serviceId) {
+            const serviceElement = document.getElementById(serviceId);
+            const serviceDescriptionElement = serviceElement.querySelector('.service-description');
+            const currentServiceName = serviceDescriptionElement.textContent;
+
+            // Prompt the user for the new service name
+            const newServiceName = prompt("Enter the new name for the service:", currentServiceName);
+            if (newServiceName) {
+                serviceDescriptionElement.textContent = newServiceName; // Update the service name displayed
+                alert("Service has been updated to: " + newServiceName);
+            }
+        }
+
+        function removeService(serviceId) {
+            if (confirm("Are you sure you want to remove this service?")) {
+                const serviceElement = document.getElementById(serviceId);
+                serviceElement.parentNode.removeChild(serviceElement); // Remove the service from the DOM
+                alert("Service has been removed.");
+            }
+        }
+
+        function addService() {
+            // Prompt the user for the new service name
+            const newServiceName = prompt("Enter the name of the new service:");
+            if (newServiceName) {
+                // Create a new service element
+                const newServiceId = 'service-' + (document.querySelectorAll('.service').length + 1); // Unique ID
+                const newServiceHtml = `
+                    <div class="service" id="${newServiceId}">
+                        <div class="service-name">Service:</div>
+                        <p class="service-description">${newServiceName}</p>
+                        <div class="options">
+                            <button class="option-box" onclick="modifyService('${newServiceId}')">Modify</button>
+                            <button class="option-box" onclick="removeService('${newServiceId}')">Delete</button>
+                        </div>
+                    </div>
+                `;
+
+                // Append the new service element to the service list
+                document.getElementById('service-list').insertAdjacentHTML('beforeend', newServiceHtml);
+                alert("New service has been added: " + newServiceName);
+            }
+        }
+
+        // Function to go back to the previous page
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" 
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" 
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" 
+    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" 
+    crossorigin="anonymous"></script>
+</body>
+</html>
