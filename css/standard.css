@@ -114,3 +114,8 @@ button.option-box:hover {
 .go-back-button:hover {
     background-color: #23272b; 
 }
+
+.tableitem{
+    padding: 10px;
+    border: 1px solid black
+  }
