@@ -13,7 +13,7 @@ Implemented pages in deliverable 1:
     -services modify (to make change on services)
     -services purchased (to view purchased services)
     -services requested (to view requested services)
--Client side of view which includes:
+    -Client side of view which includes:
     -client index (dashboard for client)
     -receipt view (for client to view receipt detail)
     -services request (to purchase other service)
