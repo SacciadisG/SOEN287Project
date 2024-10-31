@@ -1,0 +1,181 @@
+h1{
+    text-align: center;
+}
+
+.logOff{
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    padding: 10px 20px;
+    background-color: darkgray;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer; 
+}
+.contactbar ul{
+    list-style-type: none;
+    background-color: blueviolet;
+    padding: 0px;
+    margin: 0px;
+    overflow: hidden;
+}
+.contactbar a{
+    color:black;
+    text-decoration: none;
+    padding: 15px;
+    display: block;
+    text-align: center;
+}
+.contactbar a:hover{
+    background-color:  rgb(70, 70, 250);
+}
+.contactbar li{
+    float: left;
+}
+
+.fa-sharp.fa-solid.fa-phone.fa-5x{
+    color:green;
+    border: 3px solid blueviolet; 
+    padding: 20px; 
+    border-radius: 10px; 
+    display: inline-flex; 
+    gap: 20px; 
+    background-color: #f0f0f0; 
+    width: 110px; /* Set a specific width */
+    height: 100px; /* Set a specific height */
+    justify-content: center; /* Center the icon horizontally */
+    align-items: center; /* Center the icon vertically */
+}
+.fa-sharp.fa-solid.fa-phone.fa-5x:hover{
+    color:greenyellow;
+}
+.fa-solid.fa-user{
+    color:blue;
+    font-size:5em;
+    border: 3px solid blueviolet; 
+    padding: 25px; 
+    border-radius: 10px; 
+    display: inline-flex; 
+    gap: 15px; 
+    background-color: #f0f0f0; 
+    width: 100px; /* Set a specific width */
+    height: 100px; /* Set a specific height */
+    justify-content: center; /* Center the icon horizontally */
+    align-items: center; /* Center the icon vertically */
+
+}
+.fa-solid.fa-user:hover{
+    color:darkblue;
+}
+.details {
+    display: none; 
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+
+.icon-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px; 
+}
+.icon-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 20px; /* Space between grid items */
+    max-width: 800px; /* Optional: Limit the maximum width */
+    margin: 20px auto; /* Center the container with some margin */
+}
+.fa-solid.fa-screwdriver-wrench{
+    color: black;
+    font-size:5em;
+    border: 3px solid blueviolet; 
+    padding: 25px; 
+    border-radius: 10px; 
+    display: inline-flex; 
+    gap: 20px; 
+    background-color: #f0f0f0;
+    width: 100px; /* Set a specific width */
+    height: 100px; /* Set a specific height */
+    justify-content: center; /* Center the icon horizontally */
+    align-items: center; /* Center the icon vertically */
+    
+}
+.fa-solid.fa-screwdriver-wrench:hover{
+    color: wheat;
+}
+
+
+.fa-solid.fa-receipt{
+    color:red;
+    font-size:5em;
+    border: 3px solid blueviolet; 
+    padding: 25px; 
+    border-radius: 10px; 
+    display: inline-flex; 
+    gap: 20px; 
+    background-color: #f0f0f0;
+    width: 100px; /* Set a specific width */
+    height: 100px; /* Set a specific height */
+    justify-content: center; /* Center the icon horizontally */
+    align-items: center; /* Center the icon vertically */
+}
+.fa-solid.fa-receipt:hover{
+    color:darkred;
+}
+
+
+.fa-solid.fa-magnifying-glass:hover{
+    color: darkgray;
+}
+.fa-solid.fa-business-time:hover{
+    color:darkgray;
+}
+.fa-solid.fa-ban:hover{
+    color:darkgray;
+}
+.fa-solid.fa-clock-rotate-left:hover{
+    color: darkgray;
+}
+.fa-solid.fa-bell{
+    color:rgb(53, 52, 52);
+    font-size:5em;
+    border: 3px solid blueviolet; 
+    padding: 25px; 
+    border-radius: 10px; 
+    display: inline-flex; 
+    gap: 20px; 
+    background-color: #f0f0f0;
+    width: 100px; /* Set a specific width */
+    height: 100px; /* Set a specific height */
+    justify-content: center; /* Center the icon horizontally */
+    align-items: center; /* Center the icon vertically */
+    
+}
+.fa-solid.fa-bell:hover{
+    color:gray;
+}
+
+.fa-solid.fa-info{
+    color: darkblue;
+    font-size: 4em; /* Increase the icon size */
+    border: 3px solid blueviolet; 
+    padding: 40px; /* Adjust padding for more space */
+    border-radius: 10px; 
+    display: inline-flex; 
+    gap: 20px; 
+    background-color: #f0f0f0;
+    width: 70px; /* Set a specific width */
+    height: 70px; /* Set a specific height */
+    justify-content: center; /* Center the icon horizontally */
+    align-items: center; /* Center the icon vertically */
+}
+
+.fa-solid.fa-info:hover{
+    color:lightskyblue;
+}

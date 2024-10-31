@@ -1,0 +1,24 @@
+.title{
+    text-align: center;
+    color: rgb(34, 34, 194);
+    background-color: grey; 
+}
+.header{
+    text-align: center;
+    color:antiquewhite
+}
+.faq_container{
+    background-color:gray;
+    padding: 50px;
+    padding-bottom: 200px;
+    margin: 50px;
+    border: 3px solid silver;
+}
+
+#h3{
+    color: rgb(34, 34, 194);
+
+}
+#p{
+    color: antiquewhite;
+}
