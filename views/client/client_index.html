@@ -6,8 +6,7 @@
     <title>Client Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> 
-    <link rel="stylesheet" href="../../css/client.css">
-    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="/css/client.css">
     <script src="client.js" defer></script>
     <script src="https://kit.fontawesome.com/7482e9f3eb.js" crossorigin="anonymous"></script>
    
@@ -25,7 +24,7 @@
             <div class="navbar-nav">
               <a class="nav-link active" href="./client_index.html">Home</a>
               <a class="nav-link" href="./communication.html">Contact Us</a>
-              <a class="nav-link" href="./services_search.html">Request a Service</a>
+              <a class="nav-link" href="./services_request.html">Request a Service</a>
               <a class="nav-link" href="./services_view.html">View Your Purchase History</a>
               <a class="nav-link" href="./receipts_view.html">View Receipts</a>
             </div>
@@ -34,68 +33,65 @@
         </div>
       </nav>
 
-      
-    <div class="container">
-        <h1>Welcome To The Client Dashboard!</h1>
-        <div class="icon-container">
-            <div class="icon-item">
-                <a href="./communication.html"><i class="fa-sharp fa-solid fa-phone fa-5x"></i></a>
-                <p>Communication</p>
-            </div>
-            <div class="icon-item">
-                <a href="#" onclick="toggleDetails('user-details')">
-                    <i class="fa-solid fa-user fa-5x"></i>
+    <h1>Welcome To The Client Dashboard!</h1>
+    <div class="icon-container">
+        <div class="icon-item">
+            <a href="communication.html"><i class="fa-sharp fa-solid fa-phone fa-5x"></i></a>
+            <p>Communication</p>
+        </div>
+        <div class="icon-item">
+            <a href="#" onclick="toggleDetails('user-details')">
+                <i class="fa-solid fa-user fa-5x"></i>
+            </a>
+            <p>User Profile</p>
+            <div class="details" id="user-details">
+                <a href="profile.html">
+                    <p> Profile Settings</p>
                 </a>
-                <p>User Profile</p>
-                <div class="details" id="user-details">
-                    <p>Profile Settings</p>
-                    <p>Account Info</p>
-                    <p>Security Settings</p>
-                </div>
-            </div>
-            <div class="icon-item">
-                <a href="#" onclick="toggleDetails('services-details')">
-                    <i class="fa-solid fa-screwdriver-wrench fa-5x"></i>
+                <a href="payment.html">
+                    <p>Payment Info</p>
                 </a>
-                <p>Services</p>
-                <div class="details" id="services-details">
-                    <i class="fa-solid fa-magnifying-glass">  Search for offered services</i>
-                    <br>
-                    <br>
-                    <a href="/views/client/services_request.html">
-                        <i class="fa-solid fa-business-time">  Request specific services</i>
-                    </a>
-                    <br>
-                    <br>
-                    <i class="fa-solid fa-ban"> Cancel a service</i>
-                    <br>
-                    <br>
-                    <a href="/views/client/services_view.html">
-                        <i class="fa-solid fa-clock-rotate-left"> overview of past and future services</i>
-                    </a>  
-                </div>
-            </div>    
-            <div class="icon-item">
-                <a href="/views/client/receipts_view.html">
-                    <i class="fa-solid fa-receipt"></i>
+            </div>
+        </div>
+        <div class="icon-item">
+            <a href="#" onclick="toggleDetails('services-details')">
+                <i class="fa-solid fa-screwdriver-wrench fa-5x"></i>
+            </a>
+            <p>Services</p>
+            <div class="details" id="services-details">
+                <a href="services_search.html">
+                    <p>  Search for offered services</p>
                 </a>
-                <p>Bills and Receipts</p>
+                
+                <a href="/views/client/services_request.html">
+                    <p>Request specific services</p>
+                </a>
+                <a href="services_cancel.html">
+                    <p>Cancel a service</p>
+                </a>
+                <a href="/views/client/services_view.html">
+                     <p>Overview of past and future services</p>
+                </a>  
             </div>
-            <div class="icon-item">
-                <a href="notification.html">
-                    <i class="fa-solid fa-bell"></i>
-                    <p>Notifications</p></a>
-            
-            </div>
+        </div>    
+        <div class="icon-item">
+            <a href="/views/client/receipts_view.html">
+                <i class="fa-solid fa-receipt"></i>
+            </a>
+            <p>Bills And Receipts</p>
+        </div>
+        <div class="icon-item">
+            <a href="notification.html"><i class="fa-solid fa-bell"></i></a>
+                <p>Notifications</p>
+           
+        </div>
 
-            <div class="icon-item">
-                <a href="/views/client/faq.html">
-                    <i class="fa-solid fa-info"></i>
-                    <p>FAQs and Help Section</p>
-                </a>
-            </div>
+        <div class="icon-item">
+            <a href="/views/client/faq.html"><i class="fa-solid fa-info"></i></a>
+            <p>FAQs And Help Section</p>
+        </div>
     </div>
-    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" 
     integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" 
     crossorigin="anonymous"></script>
