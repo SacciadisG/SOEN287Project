@@ -7,8 +7,12 @@ const UserSchema = new Schema({
     isAdmin: { type: Boolean, default: false, required: true },
     full_name: { type: String, required: false },
     email: { type: String, required: false },
-    phone_number: { type: String, required: false }
-    //We will implement an address field later, these are just the starters
+    phone_number: { type: String, required: false },
+    //This field below tracks a user's requested services
+    service_list: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Service'
+      }]
 });
 
 /* Note: 

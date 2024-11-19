@@ -10,8 +10,12 @@ const LocalStrategy = require('passport-local');
 
 const app = express(); //Renaming since it's easier to write app.[method]
 
+//Serves static files (eg. css files) from the 'public' directory
+app.use(express.static('public'));
+
 //MODELS
 const User = require('./models/user');
+const Service = require('./models/service');
 
 //DATABASE SETUP
 //Connect to mongoose
@@ -58,13 +62,13 @@ passport.deserializeUser(User.deserializeUser()); //How to remove a user from a 
 app.use((req, res, next) => {
     //Note that res.locals is meant for data passed to the "views" folder. 
     //It's not automatically available in all routes!
-    res.locals.currentUser = req.user; 
+    res.locals.currentUser = req.user;
     //Can add more here, as needed*
     next();
 })
 
 
-//STANDARD ROUTES (LOGIN & REGISTER)
+//STANDARD ROUTES (REGISTER, LOGIN, LOGOUT)
 app.get('/register', (req, res) => {
     res.render('register')
 })
@@ -76,13 +80,7 @@ app.post('/register', async (req, res) => {
         const registeredUser = await User.register(user, password);
         req.login(registeredUser, err => {
             if(err) return next(err); //Callback function if an error occurs
-            //If they're a business admin, redirect to the business dashboard; else, go to the client dahsboard
-            if (req.user.isAdmin) {
-                res.redirect('/business/index');
-            }
-            else {
-                res.redirect('/client/index')
-            }
+            res.redirect('/login');
         })
     } catch(e) {
         res.redirect('register'); //Something happened, so go back to the register page
@@ -94,6 +92,7 @@ app.get('/login', (req, res) => {
 })
 
 app.post('/login', passport.authenticate('local', { failureRedirect: '/login' }), (req, res) => {
+    //If they're a business admin, redirect to the business dashboard; else, go to the client dahsboard
     if (req.user.isAdmin) {
         res.redirect('/business/index');
     }
@@ -101,6 +100,16 @@ app.post('/login', passport.authenticate('local', { failureRedirect: '/login' })
         res.redirect('/client/index')
     }
 })
+
+//Passport's logout requires a callback function, so it has a bit more code
+app.post('/logout', (req, res, next) => {
+    req.logout(function (err) {
+        if (err) {
+            return next(err);
+        }
+        res.redirect('/login');
+    });
+});
 
 //BUSINESS ROUTES
 app.get('/business/index', (req, res) => {
@@ -112,6 +121,10 @@ app.get('/business/index', (req, res) => {
 //CLIENT ROUTES
 app.get('/client/index', (req, res) => {
     res.render('client/client_index');
+})
+
+app.get('/client/communication', (req, res) => {
+    res.render('client/communication');
 })
 
 //Implement the rest below..

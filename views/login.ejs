@@ -11,37 +11,37 @@
 <body>
 <div class="container">
 <h1>Login Page</h1>
-        <div class="service"> <!-- Add action & method afterwards when routes enabled -->
+        <form class="service" action="/login" method="POST">
             <h2>Client Login</h2>
             <div class="option">
                 <label for="username">Enter username:</label>
-                <input type="text" name="username" id="username" placeholder="Username"> 
+                <input type="text" name="username" id="username" placeholder="Username" required> 
             </div>
             <div class="option" style="padding-top: 5px;">
                 <label for="password" style="padding-right: 2px;">Enter password:</label>
-                <input type="password" name="password" id="password" placeholder="Password"> 
+                <input type="password" name="password" id="password" placeholder="Password" required> 
             </div>
             <div class="option" style="display: flex; justify-content: center; padding-top: 10px;">
-                <button class="option-box" onclick="location.href='./client/client_index.html'">Login</button>
+                <button class="option-box" type="submit">Login</button>
             </div>
-        </div>
-        <div class="service"> <!-- Add action & method afterwards when routes enabled -->
+        </form>
+        <form class="service" action="/login" method="POST">
             <h2>Business Login</h2>
             <div class="option">
                 <label for="username">Enter username:</label>
-                <input type="text" name="username" id="username" placeholder="Username"> 
+                <input type="text" name="username" id="username" placeholder="Username" required> 
             </div>
             <div class="option" style="padding-top: 5px;">
                 <label for="password" style="padding-right: 2px;">Enter password:</label>
-                <input type="password" name="password" id="password" placeholder="Password"> 
+                <input type="password" name="password" id="password" placeholder="Password" required> 
             </div>
             <div class="option" style="display: flex; justify-content: center; padding-top: 10px;">
-                <button class="option-box" onclick="location.href='./business/business_index.html'">Login</button>
+                <button class="option-box" type="submit">Login</button>
             </div>
-        </div>
+        </form>
         <div>
             <p class="service-description">Don't have an account? Click below to create one!</p>
-            <button class="go-back-button" onclick="location.href='./register.html'">Register</button>
+            <button class="go-back-button" onclick="location.href='register'">Register</button>
         </div>
 </div>
 

@@ -7,13 +7,15 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active" href="./client_index.html">Home</a>
-        <a class="nav-link" href="./communication.html">Contact Us</a>
+        <a class="nav-link active" href="/client/index">Home</a>
+        <a class="nav-link" href="/communication">Contact Us</a>
         <a class="nav-link" href="./services_request.html">Request a Service</a>
         <a class="nav-link" href="./services_view.html">View Your Purchase History</a>
         <a class="nav-link" href="./receipts_view.html">View Receipts</a>
       </div>
     </div>
-    <button class="btn btn-danger" style="display:flex; margin-left: auto" onclick="location.href='../login.html'">Logout</button>
+    <form action="/logout" method="POST">
+      <button class="btn btn-danger" style="display:flex; margin-left: auto" type="submit">Logout</button>
+    </form>
   </div>
 </nav>

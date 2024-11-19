@@ -13,30 +13,12 @@
 </head>
 
 <body>
-    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="./client_index.html">Business Name</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" 
-          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-              <a class="nav-link active" href="./client_index.html">Home</a>
-              <a class="nav-link" href="./communication.html">Contact Us</a>
-              <a class="nav-link" href="./services_request.html">Request a Service</a>
-              <a class="nav-link" href="./services_view.html">View Your Purchase History</a>
-              <a class="nav-link" href="./receipts_view.html">View Receipts</a>
-            </div>
-          </div>
-          <button class="btn btn-danger" style="display:flex; margin-left: auto" onclick="location.href='../login.html'">Logout</button>
-        </div>
-      </nav>
+    <%- include("../partials/client_navbar") %>
 
     <h1>Welcome To The Client Dashboard!</h1>
     <div class="icon-container">
         <div class="icon-item">
-            <a href="./communication.html"><i class="fa-sharp fa-solid fa-phone fa-5x"></i></a>
+            <a href="/client/communication"><i class="fa-sharp fa-solid fa-phone fa-5x"></i></a>
             <p>Communication</p>
         </div>
         <div class="icon-item">
