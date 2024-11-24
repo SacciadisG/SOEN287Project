@@ -159,6 +159,18 @@ app.get('/business/edit', async (req, res) => {
     }
 });
 
+app.get('/business/services_requested', async(req, res) => {
+    try {
+        const purchases = await Purchase.find({})
+        .populate('service') // Replace 'service' ObjectId with the actual Service document
+        .populate('user'); // Replace 'user' ObjectId with the actual User document
+        res.render('business/services_requested', {purchases});
+    } catch (err) {
+        console.error("Error fetching purchases:", err);
+        res.redirect('/business/index');
+    }
+})
+
 //Updates the business information 
 app.put('/business/edit', async (req, res) => {
     try {
