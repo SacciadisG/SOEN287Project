@@ -1,6 +1,11 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="./client_index.html">Business Name</a>
+    <a class="navbar-brand" href="/client/index">
+      <% if (businessInfo.logo) { %>
+        <img src="<%= businessInfo.logo %>" alt="Business Logo" style="height: 40px; margin-right: 10px;">
+      <% } %>
+      <%= businessInfo.name || "Default Business Name" %>
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" 
     aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
