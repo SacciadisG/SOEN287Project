@@ -182,8 +182,6 @@ app.put('/business/edit', async (req, res) => {
     }
 });
 
-
-
 //CLIENT ROUTES
 app.get('/client/index', (req, res) => {
     res.render('client/client_index');
@@ -192,6 +190,33 @@ app.get('/client/index', (req, res) => {
 app.get('/client/communication', (req, res) => {
     res.render('client/communication');
 })
+
+app.get('/client/services_search', async (req, res) => {
+    const services = await Service.find({});
+    res.render('client/services_search', { services }); //Loads up all services to the rendered page
+})
+
+app.post('/client/services_search', async (req, res) => {
+    try {
+        // Get the current user and the service ID from the request
+        const { serviceId } = req.body;
+        const currentUser = res.locals.currentUser;
+
+        // Find the service by ID
+        const service = await Service.findById(serviceId);
+
+        // Create the new purchase
+        const newPurchase = new Purchase({
+            service: service._id,
+            user: currentUser._id, // Use the current user's ID
+        });
+
+        await newPurchase.save();
+    } catch (error) {
+        console.error('Error creating purchase:', error);
+    }
+    res.redirect('/client/index');
+});
 
 //Implement the rest below..
 
