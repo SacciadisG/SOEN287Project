@@ -146,11 +146,13 @@ app.post('/logout', (req, res, next) => {
     });
 });
 
-//BUSINESS ROUTES_______________________________________________________________________________________________________
+//BUSINESS ROUTES___
+//Business Dashboard
 app.get('/business/index', (req, res) => {
     res.render('business/business_index');
 })
 
+//Edit Business Info Page
 app.get('/business/edit', async (req, res) => {
     try {
         //const businessInfo = await BusinessInfo.findOne(); // Assumes one document for business info
@@ -161,18 +163,6 @@ app.get('/business/edit', async (req, res) => {
         res.redirect('/business/index');
     }
 });
-
-app.get('/business/services_requested', async(req, res) => {
-    try {
-        const purchases = await Purchase.find({})
-        .populate('service') // Replace 'service' ObjectId with the actual Service document
-        .populate('user'); // Replace 'user' ObjectId with the actual User document
-        res.render('business/services_requested', {purchases});
-    } catch (err) {
-        console.error("Error fetching purchases:", err);
-        res.redirect('/business/index');
-    }
-})
 
 //Updates the business information 
 app.put('/business/edit', async (req, res) => {
@@ -196,6 +186,55 @@ app.put('/business/edit', async (req, res) => {
         res.redirect('/business/edit');
     }
 });
+
+//See requested services
+app.get('/business/services_requested', async(req, res) => {
+    try {
+        const purchases = await Purchase.find({})
+        .populate('service') // Replace 'service' ObjectId with the actual Service document
+        .populate('user'); // Replace 'user' ObjectId with the actual User document
+        res.render('business/services_requested', {purchases});
+    } catch (err) {
+        console.error("Error fetching purchases:", err);
+        res.redirect('/business/index');
+    }
+})
+
+app.patch('/business/services_requested/:id', async (req, res) => {
+    try {
+        const { id } = req.params; // ID of the purchase
+        const { status } = req.body; // New status from the form
+
+        // Validate status value
+        if (!['confirmed', 'rejected'].includes(status)) {
+            req.flash('error', 'Invalid status update.');
+            return res.redirect('/business/services_requested');
+        }
+
+        // Update the purchase's status
+        await Purchase.findByIdAndUpdate(id, { status });
+        //req.flash('success', `Purchase status updated to "${status}".`);
+        res.redirect('/business/services_requested');
+    } catch (err) {
+        console.error('Error updating purchase status:', err);
+        //req.flash('error', 'Failed to update purchase status.');
+        res.redirect('/business/services_requested');
+    }
+});
+
+
+//See (confirmed) clients' purchased services
+app.get('/business/services_purchased', async (req, res) => {
+    try {
+        const purchases = await Purchase.find({})
+        .populate('service') // Replace 'service' ObjectId with the actual Service document
+        .populate('user'); // Replace 'user' ObjectId with the actual User document
+        res.render('business/services_purchased', {purchases});
+    } catch (err) {
+        console.error("Error fetching purchases:", err);
+        res.redirect('/business/index');
+    }
+})
 
 //GET route for the modify services page
 app.get('/business/services', async (req, res) => {
@@ -255,11 +294,13 @@ app.get('/client/communication', (req, res) => {
     res.render('client/communication');
 })
 
+//Service lookup & purchase page
 app.get('/client/services_search', async (req, res) => {
     const services = await Service.find({});
     res.render('client/services_search', { services }); //Loads up all services to the rendered page
 })
 
+//Purchases the selected service
 app.post('/client/services_search', async (req, res) => {
     try {
         // Get the current user and the service ID from the request

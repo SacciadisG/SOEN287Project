@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Requested Services</title>
+    <title>Purchased Services</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> 
     <link rel="stylesheet" href="../../css/style.css">
@@ -12,16 +12,17 @@
 
 <body>
     <%- include("../partials/business_navbar") %>
+
     <div class="container">
-        <h1>Manage Requested Services</h1>
-        <p>Here are the most recently client-requested services:</p>
+        <h1>Purchased Services</h1>
+        <p>History of services recently purchased by clients:</p>
 
         <div id="requested-service-list">
             <% purchases.forEach(purchase => { %>
                 <div class="service">
                     <div class="service-name"> <%= purchase.service.name %> (<%= purchase.service.price %> CAD)</div>
                     <div class="service-description"> 
-                        <strong>Requested:</strong> <%= purchase.datePurchased.toLocaleString('en-US', { 
+                        <strong>Purchased:</strong> <%= purchase.datePurchased.toLocaleString('en-US', { 
                             year: 'numeric', 
                             month: 'long', 
                             day: 'numeric', 
@@ -35,29 +36,36 @@
                                     purchase.status === 'pending' ? 'grey' : 
                                     'red' %>;"><%= purchase.status %></span>
                     </div>
-                    <% if (purchase.status === 'pending') { %>
                     <div class="options">
                         <!-- Form to update status to "rejected" -->
-                        <form action="/business/services_requested/<%= purchase._id %>?_method=PATCH" method="POST">
-                            <input type="hidden" name="status" value="rejected">
-                            <button type="submit" class="option-box" style="background-color:crimson">Remove</button>
-                        </form>
-        
-                        <!-- Form to update status to "confirmed" -->
-                        <form action="/business/services_requested/<%= purchase._id %>?_method=PATCH" method="POST">
-                            <input type="hidden" name="status" value="confirmed">
-                            <button type="submit" class="option-box" style="background-color:seagreen">Confirm</button>
+                        <form action="#">
+                            <button type="submit" class="btn btn-secondary">Contact Customer</button>
                         </form>
                     </div>
-                    <% } %>
                 </div>
             <% }) %>
         </div>
     </div>
 
     <div class="options" style="margin: 20px auto; text-align: center;">
-        <button class="go-back-button" onclick="location.href='/business/index'">Go Back</button>
+        <button class="go-back-button" onclick="goBack()">Go Back</button>
     </div>    
+
+    <script>
+        function removeRequestedService(serviceId) {
+            if (confirm("Are you sure you want to remove this service?")) {
+                const serviceElement = document.getElementById(serviceId);
+                serviceElement.parentNode.removeChild(serviceElement); // Remove the service from the DOM
+                alert("Service has been removed from your requests.");
+            }
+        }
+
+        // Function to go back to the previous page
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+    <!-- Bootstrap scripts should be at the end, so as to not clutter the rest of the page's code-->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" 
     integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" 
     crossorigin="anonymous"></script>
