@@ -16,6 +16,11 @@ app.use(express.static('public'));
 //MODELS
 const User = require('./models/user');
 const Service = require('./models/service');
+const BusinessInfo = require('./models/business_info'); 
+const Purchase = require('./models/purchase');
+
+//STARTUP SCRIPTS AT RUNTIME
+const runStartupScripts = require('./startup');
 
 //DATABASE SETUP
 //Connect to mongoose
@@ -23,9 +28,10 @@ mongoose.connect('mongodb://localhost:27017/soen287project');
 
 //Mongoose's proposed db connection check
 const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:")); //Listens for "Error" event & triggers if found
-db.once("open", () => { //Listens for "Open" event, i.e. an established connection with MongoDB & triggers if found
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", async () => {
     console.log("Database connected");
+    await runStartupScripts(); // Initialize BusinessInfo on startup & other stuff to come..
 });
 
 //EXPRESS SETUP
@@ -59,12 +65,38 @@ passport.serializeUser(User.serializeUser()); //How to store a user in the sessi
 passport.deserializeUser(User.deserializeUser()); //How to remove a user from a session i.e. log them out
 
 //Middleware that'll execute on every request to the server
-app.use((req, res, next) => {
+app.use(async(req, res, next) => {
     //Note that res.locals is meant for data passed to the "views" folder. 
     //It's not automatically available in all routes!
     res.locals.currentUser = req.user;
-    //Can add more here, as needed*
-    next();
+    try {
+        // Fetch the BusinessInfo (there should always be one after initialization)
+        const businessInfo = await BusinessInfo.findOne();
+        if (businessInfo) {
+            res.locals.businessInfo = businessInfo; // Attach the info to res.locals
+        } else {
+            // If for some reason it doesn't exist, provide default values
+            res.locals.businessInfo = {
+                name: "Default Business Name",
+                address: "123 Default Street",
+                postal_code: "A1B 2C3",
+                email: "default.email@domain.com",
+                phone: "123-456-7890",
+            };
+        }
+    } catch (error) {
+        console.error("Error fetching business info:", error);
+        // Provide default values in case of an error
+        res.locals.businessInfo = {
+            name: "Default Business Name",
+            address: "123 Default Street",
+            postal_code: "A1B 2C3",
+            email: "default.email@domain.com",
+            phone: "123-456-7890",
+        };
+        next(); // Proceed to the next middleware or route
+    }
+    next(); 
 })
 
 
@@ -116,7 +148,39 @@ app.get('/business/index', (req, res) => {
     res.render('business/business_index');
 })
 
-//Implement the rest below..
+app.get('/business/edit', async (req, res) => {
+    try {
+        //const businessInfo = await BusinessInfo.findOne(); // Assumes one document for business info
+        //res.render('business/business_edit', { businessInfo });
+        res.render('business/business_edit');
+    } catch (err) {
+        console.error("Error fetching business info:", err);
+        res.redirect('/business/index');
+    }
+});
+
+//Updates the business information 
+app.put('/business/edit', async (req, res) => {
+    try {
+        const { name, address, postal_code, email, phone } = req.body;
+
+        const updatedData = { name, address, postal_code, email, phone };
+
+        // Update the business info in the database
+        const updatedBusinessInfo = await BusinessInfo.findOneAndUpdate(
+            {}, // Empty query to match the single document
+            updatedData,
+            { new: true, upsert: true } // Return the updated document or create one if none exists
+        );
+
+        // req.flash('success', 'Business info updated successfully!'); *IMPLEMENT THIS LATER
+        res.redirect('/business/index');
+    } catch (err) {
+        console.error("Error updating business info:", err);
+        //req.flash('error', 'Failed to update business info.'); *IMPLEMENT THIS LATER
+        res.redirect('/business/edit');
+    }
+});
 
 //CLIENT ROUTES
 app.get('/client/account', (req, res) => {
@@ -136,6 +200,33 @@ app.get('/client/client_index', (req, res) => {
 app.get('/client/communication', (req, res) => {
     res.render('client/communication');
 })
+
+app.get('/client/services_search', async (req, res) => {
+    const services = await Service.find({});
+    res.render('client/services_search', { services }); //Loads up all services to the rendered page
+})
+
+app.post('/client/services_search', async (req, res) => {
+    try {
+        // Get the current user and the service ID from the request
+        const { serviceId } = req.body;
+        const currentUser = res.locals.currentUser;
+
+        // Find the service by ID
+        const service = await Service.findById(serviceId);
+
+        // Create the new purchase
+        const newPurchase = new Purchase({
+            service: service._id,
+            user: currentUser._id, // Use the current user's ID
+        });
+
+        await newPurchase.save();
+    } catch (error) {
+        console.error('Error creating purchase:', error);
+    }
+    res.redirect('/client/index');
+});
 
 app.get('/client/faq', (req, res) => {
     res.render('client/faq');
@@ -167,10 +258,6 @@ app.get('/client/services_cancel', (req, res) => {
 
 app.get('/client/services_request', (req, res) => {
     res.render('client/services_request');
-})
-
-app.get('/client/services_search', (req, res) => {
-    res.render('client/services_search');
 })
 
 app.get('/client/services_view', (req, res) => {
