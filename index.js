@@ -127,6 +127,18 @@ app.get('/client/communication', (req, res) => {
     res.render('client/communication');
 })
 
+app.get('/client/services_view', (req, res) => {
+    res.render('client/services_view', { currentUser: req.user });
+})
+
+app.get('/client/receipts_view', (req, res) => {
+    res.render('client/receipts_view', { currentUser: req.user });
+})
+
+app.get('/client/services_bill', (req, res) => {
+    res.render('client/services_bill');
+})
+
 //Implement the rest below..
 
 //Runs server on port 3000 (standard port)

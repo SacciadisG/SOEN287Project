@@ -30,18 +30,30 @@
           <button class="btn btn-danger" style="display:flex; margin-left: auto" onclick="location.href='../login.html'">Logout</button>
         </div>
       </nav>
-<div class="container">
+<div class="receipt">
     <h1>Receipt</h1>
+    <!-- Change description/info of business (should be dynamic)-->
     <b>
         <h2>Company name</h2>
         <h3>Contact Info:</h3>
-        <p>
+        <p> 
             Address : 123</br>
             Email : abc@mail.com</br>
             Phone : (123)-456-7890</br>
         </p>
     </b>
 
+    <!-- User information -->
+    <b>
+        <h3>Customer Detail:</h3>
+        <p> 
+            Name: <%= currentUser.full_name %></br>
+            Email : <%= currentUser.email %></br>
+            Phone : <%= currentUser.phone_number %></br>
+        </p>
+    </b>
+
+    <!-- Display all services from user -->
     <div id="table">
         <table>
             <tr class="tabletitle">
@@ -90,10 +102,31 @@
                     <p class="itemtext">300</p>
                 </td>
             </tr>
+            <!-- Display the services from user (not sure if it works) -->
+            <% 
+                let totalPrice = 0;
+                for (let i = 0; i < currentUser.service_list.length; i++) {
+                    let service = currentUser.service_list[i];
+                    totalPrice += service.price; 
+            %>
+                <tr class="service">
+                    <td class="tableitem">
+                        <p class="itemtext"><%= service.name %></p>
+                    </td>
+                    <td class="tableitem">
+                        <p class="itemtext"><%= service.date %></p>
+                    </td>
+                    <td class="tableitem">
+                        <!-- Should dispay the date of purchase but the service model does not have that but instead have description -->
+                        <p class="itemtext"><%= service.description %></p> 
+                    </td>
+                </tr>
+            <% } %>
         </table>
     </div>
-        <h4>Total: 400</h4>
-        <p>Thank you for your puchase!</p>
+        <br>
+        <h4>Total: <%= totalPrice %></h4>
+        <p>Thank you for your purchase!</p>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" 
