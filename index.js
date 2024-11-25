@@ -245,6 +245,10 @@ app.post('/client/services_search', async (req, res) => {
 //Implement the rest below..
 // Add card
 app.post('/addCard', async (req, res) => {
+    if (!req.user) {
+        return res.status(401).send('User not authenticated'); // Handle case if user is not logged in
+    }
+
     const { cardType, cardNumber, expiryDate, cardName } = req.body;
 
     const newCard = new Card({
@@ -264,20 +268,23 @@ app.post('/addCard', async (req, res) => {
     }
 });
 
-
 // Get all cards
 app.get('/getCards', async (req, res) => {
+    if (!req.user) {
+        return res.status(401).send('User not authenticated'); // Handle case if user is not logged in
+    }
+
+    const userId = req.user._id;
     try {
-        const userId = req.user._id; // Extract user ID
-        
-        const cards = await Card.find({ user: userId }); // Fetch cards associated with the user
-        
-        res.json(cards); // Send the cards to the frontend
+        const cards = await Card.find({ user: userId });
+        res.json(cards);
     } catch (error) {
         console.error('Error fetching cards:', error);
         res.status(500).send('Error fetching cards');
     }
 });
+
+
 
 
 // Delete card by ID
