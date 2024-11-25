@@ -27,10 +27,10 @@
             </a>
             <p>User Profile</p>
             <div class="details" id="user-details">
-                <a href="./profile.html">
+                <a href="/client/profile">
                     <p> Profile Settings</p>
                 </a>
-                <a href="./payment.html">
+                <a href="/client/payment">
                     <p>Payment Info</p>
                 </a>
             </div>
@@ -41,14 +41,14 @@
             </a>
             <p>Services</p>
             <div class="details" id="services-details">
-                <a href="./services_search.html">
+                <a href="/client/services_search">
                     <p>  Search for offered services</p>
                 </a>
                 
-                <a href="./services_request.html">
+                <a href="/client/services_request">
                     <p>Request specific services</p>
                 </a>
-                <a href="./services_cancel.html">
+                <a href="/client/services_cancel">
                     <p>Cancel a service</p>
                 </a>
                 <a href="/client/services_view">
@@ -57,23 +57,26 @@
             </div>
         </div>    
         <div class="icon-item">
-            <a href="./receipts_view.html">
+            <a href="/client/receipts_view">
                 <i class="fa-solid fa-receipt"></i>
             </a>
             <p>Bills And Receipts</p>
         </div>
         <div class="icon-item">
-            <a href="./notification.html"><i class="fa-solid fa-bell"></i></a>
+            <a href="/client/notification"><i class="fa-solid fa-bell"></i></a>
                 <p>Notifications</p>
            
         </div>
 
         <div class="icon-item">
-            <a href="./faq.html"><i class="fa-solid fa-info"></i></a>
+            <a href="/client/faq"><i class="fa-solid fa-info"></i></a>
             <p>FAQs And Help Section</p>
         </div>
     </div>
-
+    <script> function toggleDetails(id) {
+        const details = document.getElementById(id);
+        details.style.display = details.style.display === "block" ? "none" : "block";
+    }</script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" 
     integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" 
     crossorigin="anonymous"></script>

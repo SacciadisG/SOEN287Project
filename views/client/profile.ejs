@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQ</title>
+    <title>Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> 
-    <link rel="stylesheet" href="../../css/faq.css">
+    <link rel="stylesheet" href="../../css/profile.css">
 </head>
 <body>
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
@@ -18,42 +18,66 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-              <a class="nav-link active" href="./client_index.html">Home</a>
-              <a class="nav-link" href="./communication.html">Contact Us</a>
-              <a class="nav-link" href="./services_request.html">Request a Service</a>
-              <a class="nav-link" href="./services_view.html">View Your Purchase History</a>
-              <a class="nav-link" href="./receipts_view.html">View Receipts</a>
+                <a class="nav-link active" href="/client/client_index.html">Home</a>
+                <a class="nav-link" href="/client/communication">Contact Us</a>
+                <a class="nav-link" href="/client/services_request">Request a Service</a>
+                <a class="nav-link" href="/client/services_view">View Your Purchase History</a>
+                <a class="nav-link" href="/client/receipts_view">View Receipts</a>
             </div>
           </div>
           <button class="btn btn-danger" style="display:flex; margin-left: auto" onclick="location.href='../login.html'">Logout</button>
         </div>
       </nav>
+
     <div class="container">
-        <h2 class="title">FAQ</h2>
-        <p class="header">Find the answers for the most frequently asked questions below</p>
-        <br>
-        <div class="first_question">
-            <h3 >Are the services free?</h3>
-            <p >Absolutely Not! You have to pay the compagnie choosen the fees that they have marked on the website
-                and the prices are non negociable.
-            </p>
-            <br>
-            <h3 >How do I pay?</h3>
-            <p >
-                Yes. Go to the billing section of your dashboard and update your payment information. 
-            </p>
-            <br>
-            <h3 > A question that is longer then the previous one?</h3>
-            <p >Yes, it is possible! You can cancel your subscription anytime in your account. Once the subscription 
-                is cancelled, you will not be charged next month.</p>
+        <div class="container">
+            <div id="picture" >
+                <center><img src="../../css/Images/profile_pic.jpg"></center>
+            </div>
+            <div id="name_pic">
+                <h2>John Smith</h3>
+            </div>
+            <div id="name_pic">
+                <p>Client</p>
+            </div>
+            
         </div>
+        <div class="container" >
+            <div id="name">
+                <h3>Full name:</h3> 
+                <p>John Smith</p>
+            </div>
+            <hr>
+            <div id="name">
+                <h3>Email:</h3>
+                <p>JohnSmith@gmail.com</p>
+            </div>
+            <hr>
+            <div id="name">
+                <h3>Phone:</h3>
+                <p>(514)-123-4567</p>
+            </div>
+            <hr>
+            <div id="name">
+                <h3>Address</h3>
+                <p>123 Road ChestNut, Montreal, QC</p>
+            </div>
+            <hr>
+            <button class="option-box" onclick="">Edit</button>
+        </div>
+    
     </div>
+    
+
+
+
     <div class="options" style="margin: 20px auto; text-align: center;">
         <button class="go-back-button" onclick="goBack()">Go Back</button>
     </div>    
 
     <script>
-      
+         
+
         // Function to go back to the previous page
         function goBack() {
             window.history.back();
@@ -66,5 +90,4 @@
     integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" 
     crossorigin="anonymous"></script>
 </body>
-  
 </html>

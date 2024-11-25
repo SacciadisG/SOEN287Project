@@ -119,7 +119,17 @@ app.get('/business/index', (req, res) => {
 //Implement the rest below..
 
 //CLIENT ROUTES
+app.get('/client/account', (req, res) => {
+    res.render('client/account');
+})
+
+//Implement the rest below..
+
 app.get('/client/index', (req, res) => {
+    res.render('client/client_index');
+})
+
+app.get('/client/client_index', (req, res) => {
     res.render('client/client_index');
 })
 
@@ -127,8 +137,20 @@ app.get('/client/communication', (req, res) => {
     res.render('client/communication');
 })
 
-app.get('/client/services_view', (req, res) => {
-    res.render('client/services_view', { currentUser: req.user });
+app.get('/client/faq', (req, res) => {
+    res.render('client/faq');
+})
+
+app.get('/client/notification', (req, res) => {
+    res.render('client/notification');
+})
+
+app.get('/client/payment', (req, res) => {
+    res.render('client/payment');
+})
+
+app.get('/client/profile', (req, res) => {
+    res.render('client/profile');
 })
 
 app.get('/client/receipts_view', (req, res) => {
@@ -139,7 +161,22 @@ app.get('/client/services_bill', (req, res) => {
     res.render('client/services_bill');
 })
 
-//Implement the rest below..
+app.get('/client/services_cancel', (req, res) => {
+    res.render('client/services_cancel');
+})
+
+app.get('/client/services_request', (req, res) => {
+    res.render('client/services_request');
+})
+
+app.get('/client/services_search', (req, res) => {
+    res.render('client/services_search');
+})
+
+app.get('/client/services_view', (req, res) => {
+    res.render('client/services_view', { currentUser: req.user });
+})
+
 
 //Runs server on port 3000 (standard port)
 app.listen(3000, () => {
