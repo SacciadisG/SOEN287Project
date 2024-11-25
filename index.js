@@ -35,6 +35,9 @@ app.set('view engine', 'ejs'); // Set ejs as the default templating engine
 app.set('views', path.join(__dirname, 'views')); // Set the directory for ejs template files
 app.use(express.urlencoded({ extended: true })); //Helps with parsing the request body
 
+//jerush added
+app.use(express.json()); // For parsing JSON bodies
+
 //Remember to npm install method-override for this
 app.use(methodOverride('_method'));
 
@@ -111,14 +114,63 @@ app.post('/logout', (req, res, next) => {
     });
 });
 
-//BUSINESS ROUTES
+//BUSINESS ROUTES_______________________________________________________________________________________________________
 app.get('/business/index', (req, res) => {
     res.render('business/business_index');
 })
 
 //Implement the rest below..
 
-//CLIENT ROUTES
+//GET route for the modify services page
+app.get('/business/services', async (req, res) => {
+    try {
+        const services = await Service.find();                      //Fetch all services from the database
+        res.render('business/services_modify', { services });       //Pass services to the EJS view
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error retrieving services");
+    }
+});
+
+//POST route for adding a new service
+app.post('/business/services', async (req, res) => {
+    try {
+        const { name, price, description } = req.body;
+        const newService = new Service({ name, price, description });
+        await newService.save();
+        res.redirect('/business/services');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error adding the service");
+    }
+});
+
+//PUT route for editing a service
+app.put('/business/services/:id', async (req, res) => {
+    try {
+        const { id } = req.params;                                  //Extract service ID from the route
+        const { name, description } = req.body;                     //Extract updated name and description from the request body
+        await Service.findByIdAndUpdate(id, { name, description }); //Update the service in the database
+        res.redirect('/business/services');                         //Redirect back to the Modify Services page
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error updating the service");
+    }
+});
+
+//DELETE route for deleting a service
+app.delete('/business/services/:id', async (req, res) => {
+    try {
+        const { id } = req.params; // Extract service ID from the route
+        await Service.findByIdAndDelete(id); // Delete the service from the database
+        res.redirect('/business/services'); // Redirect back to the Modify Services page
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error deleting the service");
+    }
+});
+
+//CLIENT ROUTES_________________________________________________________________________________________________________
 app.get('/client/index', (req, res) => {
     res.render('client/client_index');
 })
