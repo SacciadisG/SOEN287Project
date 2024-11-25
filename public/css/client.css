@@ -106,7 +106,7 @@ h1{
     max-width: 800px; /* Optional: Limit the maximum width */
     margin: 20px auto; /* Center the container with some margin */
 }
-.fa-solid.fa-screwdriver-wrench{
+.fa-solid.fa-magnifying-glass{
     color: black;
     font-size:5em;
     border: 3px solid black; 
@@ -121,7 +121,7 @@ h1{
     align-items: center; /* Center the icon vertically */
     
 }
-.fa-solid.fa-screwdriver-wrench:hover{
+.fa-solid.fa-magnifying-glass:hover{
     color: wheat;
 }
 
@@ -172,8 +172,8 @@ h1{
     display: inline-flex; 
     gap: 20px; 
     background-color: #f0f0f0;
-    width: 70px; /* Set a specific width */
-    height: 70px; /* Set a specific height */
+    width: 100px; /* Set a specific width */
+    height: 100px; /* Set a specific height */
     justify-content: center; /* Center the icon horizontally */
     align-items: center; /* Center the icon vertically */
 }

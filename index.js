@@ -7,9 +7,15 @@ const methodOverride = require('method-override');
 const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 
 const app = express(); //Renaming since it's easier to write app.[method]
 
+//CORS Configuration
+app.use(cors());
+// Middleware
+app.use(bodyParser.json());
 //Serves static files (eg. css files) from the 'public' directory
 app.use(express.static('public'));
 
@@ -18,6 +24,8 @@ const User = require('./models/user');
 const Service = require('./models/service');
 const BusinessInfo = require('./models/business_info'); 
 const Purchase = require('./models/purchase');
+const Card = require('./models/card'); 
+
 
 //STARTUP SCRIPTS AT RUNTIME
 const runStartupScripts = require('./startup');
@@ -191,6 +199,22 @@ app.get('/client/communication', (req, res) => {
     res.render('client/communication');
 })
 
+app.get('/client/profile', (req, res) => {
+    res.render('client/profile');
+})
+
+app.get('/client/payment', (req, res) => {
+    res.render('client/payment');
+})
+
+app.get('/client/notification', (req, res) => {
+    res.render('client/notification');
+})
+
+app.get('/client/faq', (req, res) => {
+    res.render('client/faq');
+})
+
 app.get('/client/services_search', async (req, res) => {
     const services = await Service.find({});
     res.render('client/services_search', { services }); //Loads up all services to the rendered page
@@ -219,6 +243,61 @@ app.post('/client/services_search', async (req, res) => {
 });
 
 //Implement the rest below..
+// Add card
+app.post('/addCard', async (req, res) => {
+    const { cardType, cardNumber, expiryDate, cardName } = req.body;
+
+    const newCard = new Card({
+        user: req.user._id, // Associate card with the authenticated user
+        cardType,
+        cardNumber,
+        expiryDate,
+        cardName,
+    });
+
+    try {
+        await newCard.save();
+        res.status(201).send('Card added successfully!');
+    } catch (error) {
+        console.error('Error adding card:', error);
+        res.status(500).send('Failed to add card.');
+    }
+});
+
+
+// Get all cards
+app.get('/getCards', async (req, res) => {
+    try {
+        const userId = req.user._id; // Extract user ID
+        
+        const cards = await Card.find({ user: userId }); // Fetch cards associated with the user
+        
+        res.json(cards); // Send the cards to the frontend
+    } catch (error) {
+        console.error('Error fetching cards:', error);
+        res.status(500).send('Error fetching cards');
+    }
+});
+
+
+// Delete card by ID
+app.delete('/deleteCard/:cardId', async (req, res) => {
+    try {
+        const { cardId } = req.params;
+
+        const deletedCard = await Card.findByIdAndDelete(cardId);
+
+        if (deletedCard) {
+            res.status(200).json({ message: 'Card deleted successfully' });
+        } else {
+            res.status(404).json({ message: 'Card not found' });
+        }
+    } catch (error) {
+        console.error('Error deleting card:', error);
+        res.status(500).json({ message: 'Failed to delete card' });
+    }
+});
+
 
 //Runs server on port 3000 (standard port)
 app.listen(3000, () => {
