@@ -229,7 +229,6 @@ app.post('/client/services_search', async (req, res) => {
 });
 
 app.put('/client/edit', async (req, res) => {
-    console.log("a")
     try {
         const { full_name, email, phone_number } = req.body;
         const currentUser = res.locals.currentUser;

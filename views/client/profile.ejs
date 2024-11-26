@@ -42,17 +42,17 @@
             </div>
             
         </div>
-        <div id="service-list">
-            <form class="service" id="editClientForm" method="POST" action="/client/edit?_method=PUT">
-                <div class="mb-3">
+        <div id="container">
+            <form class="container" id="editClientForm" method="POST" action="/client/edit?_method=PUT">
+                <div class="name">
                     <label for="full_name" class="form-label"><b>Name:</b></label>
                     <input type="text" class="form-control" id="full_name" name="full_name" value="<%= currentUser.full_name %>" required>
                 </div>
-                <div class="mb-3">
+                <div class="name">
                     <label for="email" class="form-label"><b>Email:</b></label>
                     <input type="text" class="form-control" id="email" name="email" value="<%= currentUser.email %>" required>
                 </div>
-                <div class="mb-3">
+                <div class="name">
                     <label for="phone_number" class="form-label"><b>Phone Number:</b></label>
                     <input type="text" class="form-control" id="phone_number" name="phone_number" value="<%= currentUser.phone_number %>" required>
                 </div>
@@ -63,9 +63,6 @@
         </div>
     
     </div>
-    
-
-
 
     <div class="options" style="margin: 20px auto; text-align: center;">
         <button class="go-back-button" onclick="goBack()">Go Back</button>
