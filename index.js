@@ -228,6 +228,29 @@ app.post('/client/services_search', async (req, res) => {
     res.redirect('/client/index');
 });
 
+app.put('/client/edit', async (req, res) => {
+    console.log("a")
+    try {
+        const { full_name, email, phone_number } = req.body;
+        const currentUser = res.locals.currentUser;
+        const updatedData = { full_name, email, phone_number };
+
+        // Update the business info in the database
+        const updatedClientInfo = await User.findOneAndUpdate(
+            { username: currentUser.username }, // Empty query to match the single document
+            updatedData,
+            { new: true, upsert: true } // Return the updated document or create one if none exists
+        );
+
+        // req.flash('success', 'Business info updated successfully!'); *IMPLEMENT THIS LATER
+        res.redirect('/client/client_index');
+    } catch (err) {
+        console.error("Error updating business info:", err);
+        //req.flash('error', 'Failed to update business info.'); *IMPLEMENT THIS LATER
+        res.redirect('/client/edit');
+    }
+});
+
 app.get('/client/faq', (req, res) => {
     res.render('client/faq');
 })
@@ -241,7 +264,14 @@ app.get('/client/payment', (req, res) => {
 })
 
 app.get('/client/profile', (req, res) => {
-    res.render('client/profile');
+    try {
+        //const businessInfo = await BusinessInfo.findOne(); // Assumes one document for business info
+        //res.render('business/business_edit', { businessInfo });
+        res.render('client/profile');
+    } catch (err) {
+        console.error("Error fetching user info:", err);
+        res.redirect('/client/client_index');
+    }
 })
 
 app.get('/client/receipts_view', (req, res) => {
