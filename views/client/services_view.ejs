@@ -26,11 +26,11 @@ for reference; it's best to have our styling look the same.
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-              <a class="nav-link active" href="./client_index.html">Home</a>
-              <a class="nav-link" href="./communication.html">Contact Us</a>
-              <a class="nav-link" href="./services_request.html">Request a Service</a>
-              <a class="nav-link" href="./services_view.html">View Your Purchase History</a>
-              <a class="nav-link" href="./receipts_view.html">View Receipts</a>
+              <a class="nav-link active" href="/client/client_index">Home</a>
+              <a class="nav-link" href="/client/communication">Contact Us</a>
+              <a class="nav-link" href="/client/services_request">Request a Service</a>
+              <a class="nav-link" href="/client/services_view">View Your Purchase History</a>
+              <a class="nav-link" href="/client/receipts_view">View Receipts</a>
             </div>
           </div>
           <button class="btn btn-danger" style="display:flex; margin-left: auto" onclick="location.href='../login.html'">Logout</button>
@@ -40,24 +40,43 @@ for reference; it's best to have our styling look the same.
     <h1>Service View</h1>
     <p>All purchased services</p>
 
+    <!-- Show services from user (maybe with date of purchase) -->
     <div class="service">
         <h2>Past</h2>
-        <p class="service-name">Regular interior cleaning</p>
+        <p class="service-name">
+          <% if (currentUser.service_list.length === 0) { %>
+            Empty
+          <% } else { %>
+            <%= currentUser.service_list.join(', ') %>
+          <% } %>
+        </p>
     </div>
 
     <div class="service">
         <h2>Present</h2>
-        <p class="service-name">Major interior cleaning</p>
+        <p class="service-name">
+          <% if (currentUser.service_list.length === 0) { %>
+            Empty
+          <% } else { %>
+            <%= currentUser.service_list.join(', ') %>
+          <% } %>
+        </p>
     </div>
 
     <div class="service">
         <h2>Future</h2>
-        <p class="service-name">Exterior cleaning</p>
+        <p class="service-name">
+          <% if (currentUser.service_list.length === 0) { %>
+            Empty
+          <% } else { %>
+            <%= currentUser.service_list.join(', ') %>
+          <% } %>
+        </p>
     </div>
 
 
     <b>For more detail on the services</b>
-    <div class="option-box"><a href="/views/client/receipts_view.html">Click here</a></div>
+    <div class="option-box"><a href="/client/receipts_view">Click here</a></div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" 
 integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" 

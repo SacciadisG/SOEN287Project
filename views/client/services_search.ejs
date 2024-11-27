@@ -10,38 +10,68 @@
 </head>
 
 <body>
-    <%- include("../partials/client_navbar") %>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="./client_index.html">Business Name</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" 
+          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link active" href="/client/client_index">Home</a>
+                <a class="nav-link" href="/client/communication">Contact Us</a>
+                <a class="nav-link" href="/client/services_request">Request a Service</a>
+                <a class="nav-link" href="/client/services_view">View Your Purchase History</a>
+                <a class="nav-link" href="/client/receipts_view">View Receipts</a>
+            </div>
+          </div>
+          <button class="btn btn-danger" style="display:flex; margin-left: auto" onclick="location.href='../login.html'">Logout</button>
+        </div>
+      </nav>
     <div class="container">
         <h1>Search for Services</h1>
         <p>Here are the services currently offered:</p>
-    
+
         <div id="service-list">
-        <% services.forEach(service => { %>
-            <div class="service">
-                <div class="service-name"> <%= service.name %> (<%= service.price %> CAD)</div>
-                <div class="service-description"> <%= service.description %> </div>
+            <div class="service" id="service-1">
+                <div class="service-name">Service:</div>
+                <p class="service-description">Exterior Window Cleaning</p>
                 <div class="options">
-                    <form action="/client/services_search" method="POST">
-                        <input type="hidden" name="serviceId" value="<%= service._id %>">
-                        <button class="option-box" type="submit" class="btn btn-primary">Purchase</button>
-                    </form>
+                    <button class="option-box" onclick="">Choose</button>
                 </div>
             </div>
-        <% }) %>
+
+            <div class="service" id="service-2">
+                <div class="service-name">Service:</div>
+                <p class="service-description">Interior Window Cleaning</p>
+                <div class="options">
+                    <button class="option-box" onclick="">Choose</button>
+                </div>
+            </div>
+
+            <div class="service" id="service-3">
+                <div class="service-name">Service:</div>
+                <p class="service-description">Package: Exterior/Interior Window Cleaning</p>
+                <div class="options">
+                    <button class="option-box" onclick="">Choose</button>
+                </div>
+            </div>
         </div>
+
+        
     </div>
-    
+
     <div class="options" style="margin: 20px auto; text-align: center;">
         <button class="go-back-button" onclick="goBack()">Go Back</button>
     </div>
-    
+
     <script>
         // Function to go back to the previous page
         function goBack() {
             window.history.back();
         }
     </script>
-    
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" 
     integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" 
     crossorigin="anonymous"></script>

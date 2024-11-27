@@ -195,6 +195,7 @@ app.put('/business/edit', async (req, res) => {
     }
 });
 
+<<<<<<< HEAD
 //See requested services
 app.get('/business/services_requested', async(req, res) => {
     try {
@@ -294,7 +295,20 @@ app.delete('/business/services/:id', async (req, res) => {
 });
 
 //CLIENT ROUTES_________________________________________________________________________________________________________
+=======
+//CLIENT ROUTES
+app.get('/client/account', (req, res) => {
+    res.render('client/account');
+})
+
+//Implement the rest below..
+
+>>>>>>> service_bill
 app.get('/client/index', (req, res) => {
+    res.render('client/client_index');
+})
+
+app.get('/client/client_index', (req, res) => {
     res.render('client/client_index');
 })
 
@@ -347,6 +361,7 @@ app.post('/client/services_search', async (req, res) => {
     res.redirect('/client/index');
 });
 
+<<<<<<< HEAD
 //Implement the rest below..
 // Add card
 app.post('/addCard', async (req, res) => {
@@ -406,6 +421,72 @@ app.delete('/deleteCard/:cardId', async (req, res) => {
         res.status(500).json({ message: 'Failed to delete card' });
     }
 });
+=======
+app.put('/client/edit', async (req, res) => {
+    try {
+        const { full_name, email, phone_number } = req.body;
+        const currentUser = res.locals.currentUser;
+        const updatedData = { full_name, email, phone_number };
+
+        // Update the business info in the database
+        const updatedClientInfo = await User.findOneAndUpdate(
+            { username: currentUser.username }, // Empty query to match the single document
+            updatedData,
+            { new: true, upsert: true } // Return the updated document or create one if none exists
+        );
+
+        // req.flash('success', 'Business info updated successfully!'); *IMPLEMENT THIS LATER
+        res.redirect('/client/client_index');
+    } catch (err) {
+        console.error("Error updating business info:", err);
+        //req.flash('error', 'Failed to update business info.'); *IMPLEMENT THIS LATER
+        res.redirect('/client/edit');
+    }
+});
+
+app.get('/client/faq', (req, res) => {
+    res.render('client/faq');
+})
+
+app.get('/client/notification', (req, res) => {
+    res.render('client/notification');
+})
+
+app.get('/client/payment', (req, res) => {
+    res.render('client/payment');
+})
+
+app.get('/client/profile', (req, res) => {
+    try {
+        //const businessInfo = await BusinessInfo.findOne(); // Assumes one document for business info
+        //res.render('business/business_edit', { businessInfo });
+        res.render('client/profile');
+    } catch (err) {
+        console.error("Error fetching user info:", err);
+        res.redirect('/client/client_index');
+    }
+})
+
+app.get('/client/receipts_view', (req, res) => {
+    res.render('client/receipts_view');
+})
+
+app.get('/client/services_bill', (req, res) => {
+    res.render('client/services_bill');
+})
+
+app.get('/client/services_cancel', (req, res) => {
+    res.render('client/services_cancel');
+})
+
+app.get('/client/services_request', (req, res) => {
+    res.render('client/services_request');
+})
+
+app.get('/client/services_view', (req, res) => {
+    res.render('client/services_view');
+})
+>>>>>>> service_bill
 
 
 //Runs server on port 3000 (standard port)
