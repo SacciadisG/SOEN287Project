@@ -274,7 +274,7 @@ app.get('/client/profile', (req, res) => {
 })
 
 app.get('/client/receipts_view', (req, res) => {
-    res.render('client/receipts_view', { currentUser: req.user });
+    res.render('client/receipts_view');
 })
 
 app.get('/client/services_bill', (req, res) => {
@@ -290,7 +290,7 @@ app.get('/client/services_request', (req, res) => {
 })
 
 app.get('/client/services_view', (req, res) => {
-    res.render('client/services_view', { currentUser: req.user });
+    res.render('client/services_view');
 })
 
 
