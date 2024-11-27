@@ -302,9 +302,6 @@ app.get('/client/communication', (req, res) => {
     res.render('client/communication');
 })
 
-<<<<<<< HEAD
-//Service lookup & purchase page
-=======
 app.get('/client/profile', (req, res) => {
     res.render('client/profile');
 })
@@ -321,7 +318,7 @@ app.get('/client/faq', (req, res) => {
     res.render('client/faq');
 })
 
->>>>>>> payment-node
+//Service lookup & purchase page
 app.get('/client/services_search', async (req, res) => {
     const services = await Service.find({});
     res.render('client/services_search', { services }); //Loads up all services to the rendered page
@@ -391,9 +388,6 @@ app.get('/getCards', async (req, res) => {
         res.status(500).send('Error fetching cards');
     }
 });
-
-
-
 
 // Delete card by ID
 app.delete('/deleteCard/:cardId', async (req, res) => {
