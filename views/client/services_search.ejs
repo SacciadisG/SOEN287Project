@@ -11,41 +11,30 @@
 
 <body>
     <%- include("../partials/client_navbar") %>
-    <div class="container">
-        <h1>Search for Services</h1>
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Search for Services</h1>
         <p>Here are the services currently offered:</p>
 
-        <div id="service-list">
-            <div class="service" id="service-1">
-                <div class="service-name">Service:</div>
-                <p class="service-description">Exterior Window Cleaning</p>
-                <div class="options">
-                    <button class="option-box" onclick="">Choose</button>
+        <div id="service-list" class="row">
+            <% services.forEach(service => { %>
+                <div class="service" id="service-<%= service._id %>">
+                    <div class="service-name">Service:</div>
+                    <p class="service-description"><%= service.name %></p>
+                    <p class="service-description">Price: $<%= service.price %></p>
+                    <p class="service-description"><%= service.description %></p>
+                    <div class="options">    
+                        <form action="/client/services_search" method="POST">
+                            <input type="hidden" name="serviceId" value="<%= service._id %>">
+                            <button type="submit" class="option-box">Request Service</button>
+                        </form>
+                    </div>
                 </div>
-            </div>
-
-            <div class="service" id="service-2">
-                <div class="service-name">Service:</div>
-                <p class="service-description">Interior Window Cleaning</p>
-                <div class="options">
-                    <button class="option-box" onclick="">Choose</button>
-                </div>
-            </div>
-
-            <div class="service" id="service-3">
-                <div class="service-name">Service:</div>
-                <p class="service-description">Package: Exterior/Interior Window Cleaning</p>
-                <div class="options">
-                    <button class="option-box" onclick="">Choose</button>
-                </div>
-            </div>
+            <% }); %>
         </div>
-
-        
     </div>
 
     <div class="options" style="margin: 20px auto; text-align: center;">
-        <button class="go-back-button" onclick="goBack()">Go Back</button>
+        <button class="go-back-button btn btn-secondary" onclick="goBack()">Go Back</button>
     </div>
 
     <script>

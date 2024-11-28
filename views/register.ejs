@@ -1,37 +1,57 @@
-<!-- This is Greg's responsibility. -->
-
 <!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
-    <title>Login Page</title>
+    <title>Register Page</title>
 </head>
 <body>
 <div class="container">
-<h1>Register</h1>
-        <form class="service" action="/register" method="POST">
-            <h2>Create an Account!</h2>
-            <div class="option">
-                <label for="username">Enter username:</label>
-                <input type="text" name="username" id="username" placeholder="Username" required> 
-            </div>
-            <div class="option" style="padding-top: 5px;">
-                <label for="password" style="padding-right: 2px;">Enter password:</label>
-                <input type="password" name="password" id="password" placeholder="Password" required> 
-            </div>
-            <div class="option" style="display: flex; justify-content: center; padding-top: 10px;">
-                <button class="option-box" type="submit">Register</button>
-            </div>
-        </form>
-        <div>
-            <p class="service-description">Already Have an Account? Login!</p>
-            <button class="go-back-button" onclick="location.href='login'">Login</button>
+    <h1>Register</h1>
+    <form class="service" action="/register" method="POST">
+        <h2>Create an Account!</h2>
+
+        <!-- Username -->
+        <div class="option">
+            <label for="username" style="padding-right: 25px;">Enter username:</label>
+            <input type="text" name="username" id="username" placeholder="Username" required> 
         </div>
-</div>
 
+        <!-- Password -->
+        <div class="option" style="padding-top: 5px;">
+            <label for="password" style="padding-right: 27px;">Enter password:</label>
+            <input type="password" name="password" id="password" placeholder="Password" required> 
+        </div>
+        <div service>
+        <!-- Full Name -->
+        <div class="option" style="padding-top: 5px; ">
+            <label for="full_name" style="padding-right: 20px;">Enter your name:</label>
+            <input type="text" name="full_name" id="full_name" placeholder="Full Name (Optional)" required> 
+        </div>
 
+        <!-- Email -->
+        <div class="option" style="padding-top: 5px;">
+            <label for="email" style="padding-right: 22px;">Enter your email:</label>
+            <input type="email" name="email" id="email" placeholder="Email (Optional)" required> 
+        </div>
+
+        <!-- Phone Number -->
+        <div class="option" style="padding-top: 5px;">
+            <label for="phone_number" style="padding-right: 5px;">Enter your number:</label>
+            <input type="tel" name="phone_number" id="phone_number" placeholder="Phone Number (Optional)" required>
+        </div>
+
+        <!-- Register Button -->
+        <div class="option" style="display: flex; justify-content: center; padding-top: 10px;">
+            <button class="option-box" type="submit">Register</button>
+        </div>
+    </form>
+
+    <div>
+        <p class="service-description">Already Have an Account? Login!</p>
+        <button class="go-back-button" onclick="location.href='login'">Login</button>
+    </div>
 </div>
 </body>
 </html>

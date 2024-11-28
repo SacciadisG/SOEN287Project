@@ -138,19 +138,39 @@ app.get('/register', (req, res) => {
     res.render('register')
 })
 
-app.post('/register', async (req, res) => {
+app.post('/register', async (req, res, next) => {
     try {
-        const { username, password } = req.body;
-        const user = new User({ username });
+        const { username, password, full_name, email, phone_number } = req.body;
+
+        // Prevent users from registering as "admin"
+        if (username.toLowerCase() === 'admin') {
+            //req.flash('error', 'The username "admin" is not allowed.');
+            return res.redirect('/register');
+        }
+
+        // Create a new user with the additional fields
+        const user = new User({ 
+            username, 
+            full_name, 
+            email, 
+            phone_number 
+        });
+
+        // Register the user using Passport
         const registeredUser = await User.register(user, password);
+
+        // Automatically log in the user after registration
         req.login(registeredUser, err => {
-            if(err) return next(err); //Callback function if an error occurs
-            res.redirect('/login');
-        })
-    } catch(e) {
-        res.redirect('register'); //Something happened, so go back to the register page
+            if (err) return next(err); // Handle login errors
+            res.redirect('/client/index'); // Redirect to client index after successful registration
+        });
+
+    } catch (e) {
+        console.error('Error during registration:', e);
+        //req.flash('error', 'Registration failed. Please try again.');
+        //res.redirect('/register'); // Redirect to register if an error occurs
     }
-})
+});
 
 app.get('/login', (req, res) => {
     res.render('login')
@@ -357,8 +377,6 @@ app.get('/business/contact/:customerId', async (req, res) => {
         res.status(500).send('Server Error');
     }
 });
-
-
 
 //CLIENT ROUTES_________________________________________________________________________________________________________
 app.get('/client/index', (req, res) => {
