@@ -336,6 +336,11 @@ app.delete('/business/services/:id', async (req, res) => {
     }
 });
 
+app.get('/business/contact/:customerId', async(req, res) => {
+    const client = User.findById(req.params.customerId);
+    res.render('business/contact_customer', { client });
+})
+
 //CLIENT ROUTES_________________________________________________________________________________________________________
 app.get('/client/index', (req, res) => {
     res.render('client/client_index');
