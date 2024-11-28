@@ -11,8 +11,10 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const fs = require('fs');
+const flash = require('connect-flash');
 
 const app = express(); //Renaming since it's easier to write app.[method]
+const { isLoggedIn, isAdmin } = require('./middleware');
 
 //CORS Configuration
 app.use(cors());
@@ -97,11 +99,16 @@ passport.use(new LocalStrategy(User.authenticate())); //Telling passport to use 
 passport.serializeUser(User.serializeUser()); //How to store a user in the session i.e. log them in & keep them logged in
 passport.deserializeUser(User.deserializeUser()); //How to remove a user from a session i.e. log them out
 
+// Flash configuration
+app.use(flash());
+
 //Middleware that'll execute on every request to the server
 app.use(async(req, res, next) => {
     //Note that res.locals is meant for data passed to the "views" folder. 
     //It's not automatically available in all routes!
     res.locals.currentUser = req.user;
+    res.locals.success = req.flash('success');
+    res.locals.error = req.flash('error');
     try {
         // Fetch the BusinessInfo (there should always be one after initialization)
         const businessInfo = await BusinessInfo.findOne();
@@ -142,52 +149,43 @@ app.post('/register', async (req, res, next) => {
     try {
         const { username, password, full_name, email, phone_number } = req.body;
 
-        // Prevent users from registering as "admin"
         if (username.toLowerCase() === 'admin') {
-            //req.flash('error', 'The username "admin" is not allowed.');
+            req.flash('error', 'The username "admin" is not allowed.');
             return res.redirect('/register');
         }
 
-        // Create a new user with the additional fields
-        const user = new User({ 
-            username, 
-            full_name, 
-            email, 
-            phone_number 
-        });
-
-        // Register the user using Passport
+        const user = new User({ username, full_name, email, phone_number });
         const registeredUser = await User.register(user, password);
 
-        // Automatically log in the user after registration
         req.login(registeredUser, err => {
-            if (err) return next(err); // Handle login errors
-            res.redirect('/client/index'); // Redirect to client index after successful registration
+            if (err) return next(err);
+            req.flash('success', 'Welcome! Your account has been created.');
+            res.redirect('/client/index');
         });
-
     } catch (e) {
         console.error('Error during registration:', e);
-        //req.flash('error', 'Registration failed. Please try again.');
-        //res.redirect('/register'); // Redirect to register if an error occurs
+        req.flash('error', 'Registration failed. Please try again.');
+        res.redirect('/register');
     }
 });
+
 
 app.get('/login', (req, res) => {
     res.render('login')
 })
 
-app.post('/login', passport.authenticate('local', { failureRedirect: '/login' }), (req, res) => {
-    //If they're a business admin, redirect to the business dashboard; else, go to the client dahsboard
-    if (req.user.isAdmin) {
-        res.redirect('/business/index');
-    }
-    else {
-        res.redirect('/client/index')
-    }
-})
+app.post('/login', passport.authenticate('local', {
+    failureRedirect: '/login',
+    failureFlash: true // Automatically flashes an error message for failed login
+}), (req, res) => {
+    const redirectUrl = req.user.isAdmin ? '/business/index' : '/client/index';
+    req.flash('success', 'Welcome back!');
+    res.redirect(redirectUrl);
+});
+
 
 //Passport's logout requires a callback function, so it has a bit more code
-app.post('/logout', (req, res, next) => {
+app.post('/logout', isLoggedIn, (req, res, next) => {
     req.logout(function (err) {
         if (err) {
             return next(err);
@@ -198,12 +196,12 @@ app.post('/logout', (req, res, next) => {
 
 //BUSINESS ROUTES___
 //Business Dashboard
-app.get('/business/index', (req, res) => {
+app.get('/business/index', isAdmin, (req, res) => {
     res.render('business/business_index');
 })
 
 //Edit Business Info Page
-app.get('/business/edit', async (req, res) => {
+app.get('/business/edit', isAdmin, async (req, res) => {
     try {
         //const businessInfo = await BusinessInfo.findOne(); // Assumes one document for business info
         //res.render('business/business_edit', { businessInfo });
@@ -215,30 +213,22 @@ app.get('/business/edit', async (req, res) => {
 });
 
 //Updates the business information 
-app.put('/business/edit', async (req, res) => {
+app.put('/business/edit', isAdmin, async (req, res) => {
     try {
         const { name, address, postal_code, email, phone } = req.body;
-
-        const updatedData = { name, address, postal_code, email, phone };
-
-        // Update the business info in the database
-        const updatedBusinessInfo = await BusinessInfo.findOneAndUpdate(
-            {}, // Empty query to match the single document
-            updatedData,
-            { new: true, upsert: true } // Return the updated document or create one if none exists
-        );
-
-        // req.flash('success', 'Business info updated successfully!'); *IMPLEMENT THIS LATER
+        await BusinessInfo.findOneAndUpdate({}, { name, address, postal_code, email, phone }, { new: true, upsert: true });
+        req.flash('success', 'Business info updated successfully!');
         res.redirect('/business/index');
     } catch (err) {
         console.error("Error updating business info:", err);
-        //req.flash('error', 'Failed to update business info.'); *IMPLEMENT THIS LATER
+        req.flash('error', 'Failed to update business info.');
         res.redirect('/business/edit');
     }
 });
 
+
 // Handle logo upload
-app.put('/business/logo', upload.single('logo'), async (req, res) => {
+app.put('/business/logo', isAdmin, upload.single('logo'), async (req, res) => {
     try {
         if (!req.file) {
             throw new Error('File upload failed.');
@@ -259,7 +249,7 @@ app.put('/business/logo', upload.single('logo'), async (req, res) => {
 
 
 //See requested services
-app.get('/business/services_requested', async(req, res) => {
+app.get('/business/services_requested', isAdmin, async(req, res) => {
     try {
         const purchases = await Purchase.find({})
         .populate('service') // Replace 'service' ObjectId with the actual Service document
@@ -271,31 +261,30 @@ app.get('/business/services_requested', async(req, res) => {
     }
 })
 
-app.patch('/business/services_requested/:id', async (req, res) => {
+app.patch('/business/services_requested/:id', isAdmin, async (req, res) => {
     try {
-        const { id } = req.params; // ID of the purchase
-        const { status } = req.body; // New status from the form
+        const { id } = req.params;
+        const { status } = req.body;
 
-        // Validate status value
         if (!['confirmed', 'rejected'].includes(status)) {
             req.flash('error', 'Invalid status update.');
             return res.redirect('/business/services_requested');
         }
 
-        // Update the purchase's status
         await Purchase.findByIdAndUpdate(id, { status });
-        //req.flash('success', `Purchase status updated to "${status}".`);
+        req.flash('success', `Purchase status updated to "${status}".`);
         res.redirect('/business/services_requested');
     } catch (err) {
         console.error('Error updating purchase status:', err);
-        //req.flash('error', 'Failed to update purchase status.');
+        req.flash('error', 'Failed to update purchase status.');
         res.redirect('/business/services_requested');
     }
 });
 
 
+
 //See (confirmed) clients' purchased services
-app.get('/business/services_purchased', async (req, res) => {
+app.get('/business/services_purchased', isAdmin, async (req, res) => {
     try {
         const purchases = await Purchase.find({})
         .populate('service') // Replace 'service' ObjectId with the actual Service document
@@ -308,7 +297,7 @@ app.get('/business/services_purchased', async (req, res) => {
 })
 
 //GET route for the modify services page
-app.get('/business/services', async (req, res) => {
+app.get('/business/services', isAdmin, async (req, res) => {
     try {
         const services = await Service.find();                      //Fetch all services from the database
         res.render('business/services_modify', { services });       //Pass services to the EJS view
@@ -319,20 +308,23 @@ app.get('/business/services', async (req, res) => {
 });
 
 //POST route for adding a new service
-app.post('/business/services', async (req, res) => {
+app.post('/business/services', isAdmin, async (req, res) => {
     try {
         const { name, price, description } = req.body;
         const newService = new Service({ name, price, description });
         await newService.save();
+        req.flash('success', 'Service added successfully!');
         res.redirect('/business/services');
     } catch (err) {
         console.error(err);
-        res.status(500).send("Error adding the service");
+        req.flash('error', 'Failed to add service.');
+        res.redirect('/business/services');
     }
 });
 
+
 //PUT route for editing a service
-app.put('/business/services/:id', async (req, res) => {
+app.put('/business/services/:id', isAdmin, async (req, res) => {
     try {
         const { id } = req.params;                                  //Extract service ID from the route
         const { name, description } = req.body;                     //Extract updated name and description from the request body
@@ -345,18 +337,21 @@ app.put('/business/services/:id', async (req, res) => {
 });
 
 //DELETE route for deleting a service
-app.delete('/business/services/:id', async (req, res) => {
+app.delete('/business/services/:id', isAdmin, async (req, res) => {
     try {
-        const { id } = req.params; // Extract service ID from the route
-        await Service.findByIdAndDelete(id); // Delete the service from the database
-        res.redirect('/business/services'); // Redirect back to the Modify Services page
+        const { id } = req.params;
+        await Service.findByIdAndDelete(id);
+        req.flash('success', 'Service deleted successfully!');
+        res.redirect('/business/services');
     } catch (err) {
         console.error(err);
-        res.status(500).send("Error deleting the service");
+        req.flash('error', 'Failed to delete service.');
+        res.redirect('/business/services');
     }
 });
 
-app.get('/business/contact/:customerId', async (req, res) => {
+
+app.get('/business/contact/:customerId', isAdmin, async (req, res) => {
     try {
         // Fetch the client information by ID
         const client = await User.findById(req.params.customerId);
@@ -379,27 +374,27 @@ app.get('/business/contact/:customerId', async (req, res) => {
 });
 
 //CLIENT ROUTES_________________________________________________________________________________________________________
-app.get('/client/index', (req, res) => {
+app.get('/client/index', isLoggedIn, (req, res) => {
     res.render('client/client_index');
 })
 
-app.get('/client/communication', (req, res) => {
+app.get('/client/communication', isLoggedIn, (req, res) => {
     res.render('client/communication');
 })
 
-app.get('/client/payment', (req, res) => {
+app.get('/client/payment', isLoggedIn, (req, res) => {
     res.render('client/payment');
 })
 
-app.get('/client/notification', (req, res) => {
+app.get('/client/notification', isLoggedIn, (req, res) => {
     res.render('client/notification');
 })
 
-app.get('/client/faq', (req, res) => {
+app.get('/client/faq', isLoggedIn, (req, res) => {
     res.render('client/faq');
 })
 
-app.get('/client/profile', (req, res) => {
+app.get('/client/profile', isLoggedIn, (req, res) => {
     try {
         res.render('client/profile');
     } catch (err) {
@@ -409,7 +404,7 @@ app.get('/client/profile', (req, res) => {
 })
 
 
-app.put('/client/edit', async (req, res) => {
+app.put('/client/edit', isLoggedIn, async (req, res) => {
     try {
         const { full_name, email, phone_number } = req.body;
         const currentUser = res.locals.currentUser;
@@ -431,34 +426,118 @@ app.put('/client/edit', async (req, res) => {
     }
 });
 
-app.get('/client/receipts_view', (req, res) => {
-    res.render('client/receipts_view');
-})
+app.get('/client/receipts_view', isLoggedIn, async (req, res) => {
+    try {
+        const currentUser = res.locals.currentUser;
 
-app.get('/client/services_bill', (req, res) => {
+        if (!currentUser) {
+            req.flash('error', 'You must be logged in to view your receipts.');
+            return res.redirect('/login');
+        }
+
+        const confirmedPurchases = await Purchase.find({ 
+            user: currentUser._id, 
+            status: 'confirmed' 
+        }).populate('service').lean();
+
+        res.render('client/receipts_view', { confirmedPurchases });
+    } catch (err) {
+        console.error('Error fetching confirmed purchases:', err);
+        req.flash('error', 'Failed to fetch receipts. Please try again.');
+        res.redirect('/client/index');
+    }
+});
+
+
+app.get('/client/services_bill', isLoggedIn, (req, res) => {
     res.render('client/services_bill');
 })
 
-app.get('/client/services_cancel', (req, res) => {
-    res.render('client/services_cancel');
-})
+app.get('/client/services_cancel', isLoggedIn, async (req, res) => {
+    try {
+        const currentUser = res.locals.currentUser;
 
-app.get('/client/services_request', (req, res) => {
+        if (!currentUser) {
+            req.flash('error', 'You must be logged in to view your pending purchases.');
+            return res.redirect('/login');
+        }
+
+        // Fetch pending purchases for the logged-in user
+        const pendingPurchases = await Purchase.find({ 
+            user: currentUser._id, 
+            status: 'pending' 
+        }).populate('service').lean();
+
+        res.render('client/services_cancel', { pendingPurchases });
+    } catch (err) {
+        console.error('Error fetching pending purchases:', err);
+        req.flash('error', 'Failed to fetch pending purchases. Please try again.');
+        res.redirect('/client/index');
+    }
+});
+
+app.delete('/client/services_cancel/:id', isLoggedIn, async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        // Ensure the user owns the purchase being deleted
+        const purchase = await Purchase.findById(id);
+        if (!purchase || purchase.user.toString() !== req.user._id.toString()) {
+            req.flash('error', 'You are not authorized to cancel this purchase.');
+            return res.redirect('/client/services_cancel');
+        }
+
+        await Purchase.findByIdAndDelete(id);
+        req.flash('success', 'Purchase cancelled successfully.');
+        res.redirect('/client/services_cancel');
+    } catch (err) {
+        console.error('Error cancelling purchase:', err);
+        req.flash('error', 'Failed to cancel purchase. Please try again.');
+        res.redirect('/client/services_cancel');
+    }
+});
+
+
+
+app.get('/client/services_request', isLoggedIn, (req, res) => {
     res.render('client/services_request');
 })
 
-app.get('/client/services_view', (req, res) => {
-    res.render('client/services_view');
-})
+app.get('/client/services_view', isLoggedIn, async (req, res) => {
+    try {
+        const currentUser = res.locals.currentUser;
+
+        if (!currentUser) {
+            req.flash('error', 'You must be logged in to view your purchases.');
+            return res.redirect('/login');
+        }
+
+        // Fetch purchases for the logged-in user
+        const purchases = await Purchase.find({ user: currentUser._id })
+            .populate('service') // Populate the service details
+            .lean(); // Convert documents to plain objects for easier handling in EJS
+
+        // Filter purchases by status
+        const requestedServices = purchases.filter(purchase => purchase.status === 'pending');
+        const purchasedServices = purchases.filter(purchase => purchase.status === 'confirmed');
+
+        res.render('client/services_view', { requestedServices, purchasedServices });
+    } catch (err) {
+        console.error('Error fetching purchases:', err);
+        req.flash('error', 'Failed to fetch purchases. Please try again.');
+        res.redirect('/client/index');
+    }
+});
+
 
 //Service lookup & purchase page
-app.get('/client/services_search', async (req, res) => {
+app.get('/client/services_search', isLoggedIn, async (req, res) => {
     const services = await Service.find({});
     res.render('client/services_search', { services }); //Loads up all services to the rendered page
 })
 
 //Purchases the selected service
-app.post('/client/services_search', async (req, res) => {
+app.post('/client/services_search', isLoggedIn, async (req, res) => {
     try {
         // Get the current user and the service ID from the request
         const { serviceId } = req.body;
@@ -482,7 +561,7 @@ app.post('/client/services_search', async (req, res) => {
 
 //Implement the rest below..
 // Add card
-app.post('/addCard', async (req, res) => {
+app.post('/addCard', isLoggedIn, async (req, res) => {
     if (!req.user) {
         return res.status(401).send('User not authenticated'); // Handle case if user is not logged in
     }
@@ -507,7 +586,7 @@ app.post('/addCard', async (req, res) => {
 });
 
 // Get all cards
-app.get('/getCards', async (req, res) => {
+app.get('/getCards', isLoggedIn, async (req, res) => {
     if (!req.user) {
         return res.status(401).send('User not authenticated'); // Handle case if user is not logged in
     }
@@ -523,7 +602,7 @@ app.get('/getCards', async (req, res) => {
 });
 
 // Delete card by ID
-app.delete('/deleteCard/:cardId', async (req, res) => {
+app.delete('/deleteCard/:cardId', isLoggedIn, async (req, res) => {
     try {
         const { cardId } = req.params;
 

@@ -3,77 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cancel Services</title>
+    <title>Cancel Pending Purchases</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> 
-    <link rel="stylesheet" href="../../css/style.css">
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> 
+    <link rel="stylesheet" href="../css/style.css">
 </head>
-
 <body>
-    <%- include("../partials/client_navbar") %>
-    <div class="container">
-        <h1>Cancel Your Services</h1>
-        <p>Here are the services you currently Choose:</p>
+    <%- include('../partials/client_navbar') %>
+    <%- include('../partials/flash_messages') %>
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Cancel Pending Purchases</h1>
 
-        <div id="service-list">
-            <div class="service" id="service-1">
-                <div class="service-name">Service:</div>
-                <p class="service-description">Exterior Window Cleaning</p>
-                <div class="options">
-                    
-                    <button class="option-box" onclick="removeService('service-1')">Delete</button>
-                </div>
-            </div>
-
-            <div class="service" id="service-2">
-                <div class="service-name">Service:</div>
-                <p class="service-description">Interior Window Cleaning</p>
-                <div class="options">
-                    
-                    <button class="option-box" onclick="removeService('service-2')">Delete</button>
-                </div>
-            </div>
-
-            <div class="service" id="service-3">
-                <div class="service-name">Service:</div>
-                <p class="service-description">Package: Exterior/Interior Window Cleaning</p>
-                <div class="options">
-                    
-                    <button class="option-box" onclick="removeService('service-3')">Delete</button>
-                </div>
-            </div>
-        </div>
-
-        
+        <% if (pendingPurchases.length > 0) { %>
+            <ul class="list-group">
+                <% pendingPurchases.forEach(purchase => { %>
+                    <li class="list-group-item">
+                        <strong>Service:</strong> <%= purchase.service.name %> <br>
+                        <strong>Price:</strong> $<%= purchase.service.price.toFixed(2) %> <br>
+                        <strong>Date Requested:</strong> <%= new Date(purchase.datePurchased).toLocaleDateString() %> <br>
+                        
+                        <!-- Cancel Button -->
+                        <form action="/client/services_cancel/<%= purchase._id %>?_method=DELETE" method="POST" class="mt-2">
+                            <button type="submit" class="btn btn-danger">Cancel Purchase</button>
+                        </form>
+                    </li>
+                <% }); %>
+            </ul>
+        <% } else { %>
+            <p>No pending purchases at the moment.</p>
+        <% } %>
     </div>
 
-    <div class="options" style="margin: 20px auto; text-align: center;">
-        <button class="go-back-button" onclick="goBack()">Go Back</button>
-    </div>
-
-    <script>
-        
-
-        function removeService(serviceId) {
-            if (confirm("Are you sure you want to remove this service?")) {
-                const serviceElement = document.getElementById(serviceId);
-                serviceElement.parentNode.removeChild(serviceElement); // Remove the service from the DOM
-                alert("Service has been removed.");
-            }
-        }
-
-        
-
-        // Function to go back to the previous page
-        function goBack() {
-            window.history.back();
-        }
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" 
-    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" 
-    crossorigin="anonymous"></script>
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" 
-    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" 
-    crossorigin="anonymous"></script>
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </body>
+<footer>
+    <%- include("../partials/footer") %>
+</footer>
 </html>

@@ -1,0 +1,16 @@
+# The second deliverable is all about the backend (everything about the logic/manipulation of data)
+# Here is what we setup:
+
+- Database setup (locally)
+- Database management 
+- User authentication (with signup and login)
+- User data (to get the user role/services)
+- Change on some of the webpages to use the data from the database (instead of hardcoding data)
+- Client view / purchase / cancel services functionality
+- Contact customer page 
+- Several client account/profile features (view & edit information)
+- Editing business information (+ uploading logo)
+- Updating navbar & footer with business information
+- Adding / editing / deleting Services offered
+- Viewing / confirming / rejecting client purchase requests
+
