@@ -2,7 +2,8 @@
   <div class="container-fluid">
     <a class="navbar-brand" href="/client/index">
       <% if (businessInfo.logo) { %>
-        <img src="<%= businessInfo.logo %>" alt="Business Logo" style="height: 40px; margin-right: 10px;">
+        <img src="<%= businessInfo.logo %>" alt="Business Logo" 
+             style="height: 40px; width: 40px; margin-right: 10px; border-radius: 50%; object-fit: cover;">
       <% } %>
       <%= businessInfo.name || "Default Business Name" %>
     </a>
@@ -12,7 +13,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active" href="/client/client_index">Home</a>
+        <a class="nav-link active" href="/client/index">Home</a>
         <a class="nav-link" href="/client/communication">Contact Us</a>
         <a class="nav-link" href="/client/services_request">Request a Service</a>
         <a class="nav-link" href="/client/services_view">View Your Purchase History</a>

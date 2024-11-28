@@ -43,18 +43,27 @@
             </form>
         </div>
         
-            <div class="service" id="company-logo">
-              <h3>Company Logo</h3>
-                <img src="../../css/Images/profile_pic.jpg" class="small-image">
-                <div class="options">
-                  <button class="option-box">Modify Logo</button>
-              </div>
-            </div>
+        <div class="service" id="company-logo">
+            <h3>Company Logo</h3>
+            <!-- Display current logo -->
+            <img src="<%= businessInfo.logo %>" alt="Company Logo" class="small-image">
+            <!-- Form for uploading a new logo -->
+            <form method="POST" action="/business/logo?_method=PUT" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="logo" class="form-label"><b>Upload New Logo:</b></label>
+                    <input type="file" class="form-control" id="logo" name="logo" accept="image/*">
+                    <input type="hidden" name="businessId" value="<%= businessInfo._id %>"> <!-- Hidden field for ID -->
+                </div>
+                <button type="submit" class="btn btn-primary">Upload Logo</button>
+            </form>
+            
+        </div>
+        
             <div class="service" id="services-offered">
               <h3>Services Offered</h3>
               <p class="service-description">To view and modify the services you offer, click below:</p>
                 <div class="options">
-                  <button class="option-box" onclick="location.href='./services_modify.html'">Modify Services</button>
+                  <button class="option-box" onclick="location.href='/business/services'">Modify Services</button>
               </div>
             </div>
         </div>
@@ -77,4 +86,7 @@
     integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" 
     crossorigin="anonymous"></script>
 </body>
+<footer>
+    <%- include("../partials/footer") %>
+</footer>
 </html>

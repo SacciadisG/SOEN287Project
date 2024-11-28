@@ -2,7 +2,8 @@
   <div class="container-fluid">
     <a class="navbar-brand" href="/business/index">
       <% if (businessInfo.logo) { %>
-        <img src="<%= businessInfo.logo %>" alt="Business Logo" style="height: 40px; margin-right: 10px;">
+        <img src="<%= businessInfo.logo %>" alt="Business Logo" 
+             style="height: 40px; width: 40px; margin-right: 10px; border-radius: 50%; object-fit: cover;">
       <% } %>
       <%= businessInfo.name || "Default Business Name" %>
     </a>

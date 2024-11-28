@@ -9,6 +9,8 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const multer = require('multer');
+const fs = require('fs');
 
 const app = express(); //Renaming since it's easier to write app.[method]
 
@@ -25,6 +27,26 @@ const Service = require('./models/service');
 const BusinessInfo = require('./models/business_info'); 
 const Purchase = require('./models/purchase');
 const Card = require('./models/card'); 
+
+//IMAGE UPLOAD SETUP
+// Set up Multer for storing uploaded files
+const uploadDir = path.join(__dirname, 'public/uploads');
+
+// Check if the directory exists, if not, create it
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+}
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, path.join(__dirname, 'public/uploads')); // Ensure this matches your directory structure
+    },
+    filename: (req, file, cb) => {
+        cb(null, `${Date.now()}-${file.originalname}`); // Generate a unique filename
+    }
+});
+const upload = multer({ storage });
+app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 
 
 //STARTUP SCRIPTS AT RUNTIME
@@ -195,6 +217,27 @@ app.put('/business/edit', async (req, res) => {
     }
 });
 
+// Handle logo upload
+app.put('/business/logo', upload.single('logo'), async (req, res) => {
+    try {
+        if (!req.file) {
+            throw new Error('File upload failed.');
+        }
+
+        const logoPath = `/uploads/${req.file.filename}`;
+        const businessId = req.body.businessId;
+
+        // Update the logo in the database
+        await BusinessInfo.findByIdAndUpdate(businessId, { logo: logoPath });
+
+        res.redirect('/business/edit');
+    } catch (error) {
+        console.error('Error uploading logo:', error);
+        res.status(500).send('Server Error: Unable to upload logo.');
+    }
+});
+
+
 //See requested services
 app.get('/business/services_requested', async(req, res) => {
     try {
@@ -319,9 +362,32 @@ app.get('/client/profile', (req, res) => {
         res.render('client/profile');
     } catch (err) {
         console.error("Error fetching user info:", err);
-        res.redirect('/client/client_index');
+        res.redirect('/client/index');
     }
 })
+
+
+app.put('/client/edit', async (req, res) => {
+    try {
+        const { full_name, email, phone_number } = req.body;
+        const currentUser = res.locals.currentUser;
+        const updatedData = { full_name, email, phone_number };
+
+        // Update the business info in the database
+        const updatedClientInfo = await User.findOneAndUpdate(
+            { username: currentUser.username }, // Empty query to match the single document
+            updatedData,
+            { new: true, upsert: true } // Return the updated document or create one if none exists
+        );
+
+        // req.flash('success', 'Business info updated successfully!'); *IMPLEMENT THIS LATER
+        res.redirect('/client/client_index');
+    } catch (err) {
+        console.error("Error updating business info:", err);
+        //req.flash('error', 'Failed to update business info.'); *IMPLEMENT THIS LATER
+        res.redirect('/client/edit');
+    }
+});
 
 app.get('/client/receipts_view', (req, res) => {
     res.render('client/receipts_view');
@@ -429,29 +495,6 @@ app.delete('/deleteCard/:cardId', async (req, res) => {
     } catch (error) {
         console.error('Error deleting card:', error);
         res.status(500).json({ message: 'Failed to delete card' });
-    }
-});
-
-
-app.put('/client/edit', async (req, res) => {
-    try {
-        const { full_name, email, phone_number } = req.body;
-        const currentUser = res.locals.currentUser;
-        const updatedData = { full_name, email, phone_number };
-
-        // Update the business info in the database
-        const updatedClientInfo = await User.findOneAndUpdate(
-            { username: currentUser.username }, // Empty query to match the single document
-            updatedData,
-            { new: true, upsert: true } // Return the updated document or create one if none exists
-        );
-
-        // req.flash('success', 'Business info updated successfully!'); *IMPLEMENT THIS LATER
-        res.redirect('/client/client_index');
-    } catch (err) {
-        console.error("Error updating business info:", err);
-        //req.flash('error', 'Failed to update business info.'); *IMPLEMENT THIS LATER
-        res.redirect('/client/edit');
     }
 });
 

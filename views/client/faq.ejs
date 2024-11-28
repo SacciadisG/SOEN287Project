@@ -9,25 +9,7 @@
     <link rel="stylesheet" href="../../css/faq.css">
 </head>
 <body>
-    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="./client_index.html">Business Name</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" 
-          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-              <a class="nav-link active" href="/client/client_index">Home</a>
-              <a class="nav-link" href="/client/communication">Contact Us</a>
-              <a class="nav-link" href="/client/services_request">Request a Service</a>
-              <a class="nav-link" href="/client/services_view">View Your Purchase History</a>
-              <a class="nav-link" href="/client/receipts_view">View Receipts</a>
-            </div>
-          </div>
-          <button class="btn btn-danger" style="display:flex; margin-left: auto" onclick="location.href='../login.html'">Logout</button>
-        </div>
-      </nav>
+    <%- include("../partials/client_navbar") %>
     <div class="container">
         <h2 class="title">FAQ</h2>
         <p class="header">Find the answers for the most frequently asked questions below</p>

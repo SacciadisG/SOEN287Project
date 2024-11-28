@@ -1,0 +1,11 @@
+<footer class="sticky-bottom text-center p-3 bg-dark text-white">
+    <div class="text-center p-3 bg-dark text-white">
+        <h5 class="text-uppercase"><%= businessInfo.name %></h5>
+        <p>
+            <strong>Address:</strong> <%= businessInfo.address %>, <%= businessInfo.postal_code %> <br>
+            <strong>Email:</strong> <a href="mailto:<%= businessInfo.email %>"><%= businessInfo.email %></a> <br>
+            <strong>Phone:</strong> <a href="tel:<%= businessInfo.phone %>"><%= businessInfo.phone %></a>
+        </p>
+        &copy; <%= new Date().getFullYear() %> <%= businessInfo.name %>. All Rights Reserved.
+    </div>
+</footer>
