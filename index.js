@@ -336,10 +336,29 @@ app.delete('/business/services/:id', async (req, res) => {
     }
 });
 
-app.get('/business/contact/:customerId', async(req, res) => {
-    const client = User.findById(req.params.customerId);
-    res.render('business/contact_customer', { client });
-})
+app.get('/business/contact/:customerId', async (req, res) => {
+    try {
+        // Fetch the client information by ID
+        const client = await User.findById(req.params.customerId);
+
+        // Check if the client exists
+        if (!client) {
+            return res.status(404).send('Client not found');
+        }
+
+        // Fetch all purchases associated with this client
+        const purchases = await Purchase.find({ user: req.params.customerId })
+            .populate('service'); // Populate the related service information
+
+        // Pass both client and purchases to the EJS template
+        res.render('business/contact_customer', { client, purchases });
+    } catch (error) {
+        console.error('Error fetching client or purchases:', error);
+        res.status(500).send('Server Error');
+    }
+});
+
+
 
 //CLIENT ROUTES_________________________________________________________________________________________________________
 app.get('/client/index', (req, res) => {
