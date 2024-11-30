@@ -23,6 +23,48 @@ h1 {
     text-align: center;
 
 }
+/* Notification Container */
+#notifications {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Individual Alerts */
+.alert {
+    padding: 15px;
+    margin: 10px 40px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.alert-success {
+    background-color: #d4edda; /* Light green */
+    border-left: 5px solid #28a745; /* Dark green border */
+    color: #155724;
+}
+
+.alert-error {
+    background-color: #f8d7da; /* Light red */
+    border-left: 5px solid #dc3545; /* Dark red border */
+    color: #721c24;
+}
+
+.alert-info {
+    background-color: #d1ecf1; /* Light blue */
+    border-left: 5px solid #17a2b8; /* Dark blue border */
+    color: #0c5460;
+}
+
+.alert-warning {
+    background-color: #fff3cd; /* Light yellow */
+    border-left: 5px solid #ffc107; /* Dark yellow border */
+    color: #856404;
+}
 
 label {
     font-size: 15px;

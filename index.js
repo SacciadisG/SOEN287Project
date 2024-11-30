@@ -386,9 +386,39 @@ app.get('/client/payment', isLoggedIn, (req, res) => {
     res.render('client/payment');
 })
 
-app.get('/client/notification', isLoggedIn, (req, res) => {
-    res.render('client/notification');
-})
+app.get('/client/notification/:status?', isLoggedIn, async (req, res) => {
+    try {
+        const { status } = req.params; 
+        const currentUser = res.locals.currentUser;
+
+        if (!currentUser) {
+            req.flash('error', 'You must be logged in to view your notifications.');
+            return res.redirect('/login');
+        }
+
+        // Validate the status parameter (if it exists)
+        if (status && !['confirmed', 'rejected'].includes(status)) {
+            req.flash('error', 'Invalid status update.');
+            return res.redirect('/client/notification');
+        }
+
+        // Fetch purchases based on the status (confirmed or rejected)
+        const filter = status ? { user: currentUser._id, status } : { user: currentUser._id }; // Default to all purchases
+        const purchases = await Purchase.find(filter).populate('service').lean();
+
+        if (purchases.length === 0) {
+            req.flash('info', 'No purchases found for the selected status.');
+        }
+
+        // Render the template with the filtered purchases
+        res.render('client/notification', { purchasedServices: purchases, status });
+    } catch (err) {
+        console.error('Error fetching purchases:', err);
+        req.flash('error', 'Failed to fetch notifications. Please try again.');
+        res.redirect('/client/index');
+    }
+});
+
 
 app.get('/client/faq', isLoggedIn, (req, res) => {
     res.render('client/faq');
@@ -418,7 +448,7 @@ app.put('/client/edit', isLoggedIn, async (req, res) => {
         );
 
         // req.flash('success', 'Business info updated successfully!'); *IMPLEMENT THIS LATER
-        res.redirect('/client/client_index');
+        res.redirect('/client/index');
     } catch (err) {
         console.error("Error updating business info:", err);
         //req.flash('error', 'Failed to update business info.'); *IMPLEMENT THIS LATER
@@ -479,6 +509,7 @@ app.get('/client/services_cancel', isLoggedIn, async (req, res) => {
 app.delete('/client/services_cancel/:id', isLoggedIn, async (req, res) => {
     try {
         const { id } = req.params;
+        
 
         // Ensure the user owns the purchase being deleted
         const purchase = await Purchase.findById(id);
